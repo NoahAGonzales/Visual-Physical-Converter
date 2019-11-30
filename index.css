@@ -1,0 +1,144 @@
+@font-face {font-family: "Orkney Light"; src: url('./fonts/orkney/Orkney\ Light.ttf')}
+@font-face {font-family: "Orkney Medium"; src: url('./fonts/orkney/Orkney\ Medium.ttf')}
+@font-face {font-family: "Orkney Bold"; src: url('./fonts/orkney/Orkney\ Bold.ttf')}
+
+body {
+   margin: 0;
+   padding: 0;
+}
+a {
+   text-decoration: none;
+}
+#get-started-button {
+   margin-top: 20vh;
+   margin-left: 60vw;
+   background-color: rgba(0, 0, 0, 0);
+   border: none;
+   border-radius: 25vw; 
+   opacity: 0;
+   animation-name: fade-in;
+   animation-delay: 10s;
+   animation-duration: 2s;
+   animation-fill-mode: forwards;
+   outline: none;
+   color: black;
+   
+
+   transition: transform;
+   transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+   transition-duration: 1s;
+}
+#get-started-button:hover {
+   transform: translateX(.4vw);
+}
+#main-text-wrapper {
+   margin-top: 25vh;
+   margin-left: 10vw;
+   padding: 0;
+}
+#main-text {
+   margin: 0;
+   padding: 0;
+   font-family: "Orkney Bold";
+   font-size: 6vw;
+}
+#text-You {
+   animation-delay: 0;
+   animation-fill-mode: forwards;
+   transform: rotate3d(0,0,0,0);
+}
+#text-We {
+   animation-delay: 3s;
+}
+#text-see {
+   animation-delay: 0;
+}
+#text-feel {
+   animation-delay: 3s;
+}
+#text-experience {
+   animation-delay: 6s;
+}
+#button-text {
+   font-size: 2vw;
+   margin: 2vh;
+   font-family: "Orkney Medium";
+}
+
+.sliding-vertical {
+   display:inline;
+}
+.rotating-text {
+   animation-name: rotate;
+   animation-duration: 6s;
+   animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+   animation-iteration-count: 1;
+   opacity: 0;
+   overflow: hidden;
+   position: absolute;
+   transform: rotate3d(1, 0, 0, 90deg);
+}
+.rotating-text-last {
+   animation-name: rotate-last;
+   animation-duration: 6s;
+   animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+   animation-iteration-count: 1;
+   opacity: 0;
+   overflow: hidden;
+   position: absolute;
+   animation-fill-mode: forwards;
+}
+
+
+@keyframes rotate {
+   0% {
+      opacity: 0;
+   }
+   25% {
+      opacity: 0;
+      transform: translateY(-4vw) rotate3d(1, 0, 0, 90deg);
+   }
+   50% {
+      opacity: 1;
+      transform: translateY(0px);
+   }
+   75% {
+      opacity: 1;
+      transform: translateY(0px);
+   }
+   100% {
+      opacity: 0;
+      transform: translateY(4vw) rotate3d(1, 0, 0, -90deg);
+   }
+}
+
+@keyframes rotate-last {
+   0% {
+      opacity: 0;
+      transform: rotate3d(1, 0, 0, 90deg);
+   }
+   25% {
+      opacity: 0;
+      transform: translateY(-4vw) rotate3d(1, 0, 0, 90deg);
+   }
+   50% {
+      opacity: 1;
+      transform: translateY(0px);
+   }
+   75% {
+      opacity: 1;
+      transform: translateY(0px);
+   }
+   100% {
+      opacity: 1;
+   }
+}
+
+@keyframes fade-in {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
