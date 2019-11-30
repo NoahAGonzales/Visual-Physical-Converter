@@ -11,4 +11,5 @@ function selectFile() {
 ipcRenderer.on("test", function(event, data) {
   filePath = data.filePaths[0];
   fileName = filePath.split('\\')[filePath.split('\\').length-1]
+  document.getElementById('filename').innerHTML=fileName
 })
