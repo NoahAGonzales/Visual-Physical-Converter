@@ -2,7 +2,7 @@
   "name": "vys-phys-convertor",
   "version": "1.0.0",
   "description": "takes a visual file and converts it to a 3d printable file",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
