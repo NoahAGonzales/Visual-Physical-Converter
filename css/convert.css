@@ -6,3 +6,23 @@ body {
    margin: 0;  
 }
 
+#progress-bar {
+   width: 50vw;
+   height: 5vh;
+   background-color: black;
+   border-radius: 5vw;
+   position: relative
+}
+#progress-bar::before {
+   content: "";
+   width: calc(var(--width, 0) * 1%);
+   position: absolute;
+   left: 1vw;
+   top: 1vh;
+   bottom: 1vh;
+   min-width: 0.1vw;
+   max-width: calc(100% - 2vw);
+   background-color: red;
+   border-radius: 5vw;
+   
+}
