@@ -19,5 +19,8 @@
   "homepage": "https://github.com/NoahAGonzales/vys-phys-convertor#readme",
   "devDependencies": {
     "electron": "^7.1.2"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security"
   }
 }

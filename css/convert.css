@@ -4,6 +4,8 @@
 
 body {
    margin: 0;  
+   height: 100%;
+   overflow: hidden;
 }
 
 #progress-bar {
@@ -23,6 +25,10 @@ body {
    min-width: 0.1vw;
    max-width: calc(100% - 2vw);
    background-color: red;
-   border-radius: 5vw;
-   
+   border-radius: 10000vw;
+}
+#img-for-analysis {
+   margin-top: 100vh;
+   opacity: 0;
+   position: fixed;
 }
