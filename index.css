@@ -10,24 +10,25 @@ a {
    text-decoration: none;
 }
 #get-started-button {
+   width: 15vw;
    margin-top: 20vh;
    margin-left: 60vw;
    background-color: rgba(0, 0, 0, 0);
    border: none;
    border-radius: 25vw; 
    opacity: 0;
-   animation-name: fade-in, hover;
-   animation-delay: 10s, 10s;
-   animation-duration: 1s, 4s;
-   animation-iteration-count: 1, infinite;
-   animation-fill-mode: forwards, none;
-   animation-timing-function:  cubic-bezier(0.445, 0.05, 0.55, 0.95), cub;
+   animation-name: fade-in;
+   animation-delay: 10s;
+   animation-duration: 1s;
+   animation-iteration-count: 1;
+   animation-fill-mode: forwards;
+   animation-timing-function:  cubic-bezier(0.445, 0.05, 0.55, 0.95);
    outline: none;
    color: black;
-   transform: translateY(-1vh);
-   
 
    transition: transform;
+   transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+   transition-duration: 1s;
 }
 #get-started-button:hover {
    transform: translateX(.4vw);
@@ -62,7 +63,6 @@ a {
 }
 #button-text {
    font-size: 2vw;
-   margin: 2vh;
    font-family: "Orkney Medium";
 }
 
@@ -89,6 +89,7 @@ a {
    position: absolute;
    animation-fill-mode: forwards;
 }
+
 
 
 @keyframes rotate {
@@ -141,17 +142,5 @@ a {
    }
    100% {
       opacity: 1;
-   }
-}
-
-@keyframes hover {
-   0% {
-      transform: translateY(-1vh);
-   }
-   50% {
-      transform: translateY(0.5vh);
-   }
-   100% {
-      transform: translateY(-1vh);
    }
 }
