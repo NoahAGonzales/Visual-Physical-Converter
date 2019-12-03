@@ -21,7 +21,7 @@ a {
    animation-duration: 1s, 4s;
    animation-iteration-count: 1, infinite;
    animation-fill-mode: forwards, none;
-   animation-timing-function:  cubic-bezier(0.445, 0.05, 0.55, 0.95), cubic-bezier(0.785, 0.135, 0.15, 0.86);
+   animation-timing-function:  cubic-bezier(0.445, 0.05, 0.55, 0.95), cub;
    outline: none;
    color: black;
    transform: translateY(-1vh);
