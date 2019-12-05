@@ -10,7 +10,9 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      nodeIntegrationWorker: true,
+      nodeIntegrationInWorker: true,
     }
   })
 
@@ -51,9 +53,9 @@ app.on('activate', () => {
   }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-
+/*
+  Selecting file
+*/
 
 let selectFile = async(event) => {
   //Opening the dialog window for selecting a file - with the filters of an image
@@ -62,10 +64,20 @@ let selectFile = async(event) => {
   ]})
 
   // Sending the file path picked back to the render process
-  event.sender.send("test", filePath)
+  event.sender.send("file path", filePath)
 }
 
 ipcMain.on('selectFile', function(event, data) {
   selectFile(event)
 })
+
+
+
+
+onmessage = function(e) {
+  this.console.log(e)
+}
+
+
+
 
