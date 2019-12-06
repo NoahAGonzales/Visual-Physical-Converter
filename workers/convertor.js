@@ -28,7 +28,9 @@ onmessage = function (e) {
  * Uses n passes of a 3-point rectangular smooth
  */
 function smooth(n) {
+   // Pass n times
    for(let passes = 0; passes < n; passes++) {
+      // Smoothing the values with the pixel values on all adjacent sides
       for(let row = 1; row < pixelValues.length-1; row++) {
          for(let col = 1; col < pixelValues[0].length-1; col++) {
             pixelValues[row][col] = (pixelValues[row-1][col] + pixelValues[row][col] + pixelValues[row+1][col] + pixelValues[row][col-1] + pixelValues[row][col+1])/5
