@@ -12,10 +12,13 @@ onmessage = function (e) {
    //Creating the write stream
    let stream = fs.createWriteStream(e.data[1].split('.')[0] + '.stl', {flags: 'w'})
 
+   //Setup
    pixelValues = e.data[2]
 
+   //Process
    smooth(1)
 
+   //Convert
    convert(stream)
 
    //Cleaning up
@@ -63,14 +66,35 @@ function writeFacetBeginning (stream) {
    // Settings
    let baseHeight = 1
    let scale = 2
-   let height = 1/255 * scale
+
+   //Adjustments
+   let height = 1/255 * 1
    let xScale = 1 / ((pixelValues.length-1 > pixelValues[0].length-1) ? (pixelValues.length-1) : (pixelValues[0].length-1)) * scale //Scale based on the larger of the dimensions
    let yScale = 1 / ((pixelValues.length-1 > pixelValues[0].length-1) ? (pixelValues.length-1) : (pixelValues[0].length-1)) * scale //Scale based on the larger of the dimensions
    
    // Status
-   let maxProgress = (pixelValues.length * pixelValues[0].length)  // Every pixel + initial triangles for sides
    let currentProgress = 0
+   let maxProgress = (pixelValues.length * pixelValues[0].length) + (6*pixelValues.length + 6*pixelValues[0].length - 12) // Every pixel + sides + base = (length*width) + (4*length-4 + 4*width-4) + (2*length-2 + 2*width-2)
+   //Adjusting maxProgress for values of 0
+   for (let row = 1; row < (pixelValues.length-1); row++) {
+      //Left edge
+      if (pixelValues[row][0] != 0)
+         maxProgress -= 3
+      //Right edge
+      if (pixelValues[row][(pixelValues[0].length-1)] != 0)
+         maxProgress -= 3
+   }
+   for (let col = 1; col < (pixelValues[0].length-1); col++) {
+      if (pixelValues[0][col] != 0) 
+         maxProgress -= 3
+      if (pixelValues[(pixelValues.length-1)][col] != 0)
+         maxProgress -= 3
+   }
+
  
+   /*
+      Conversion
+   */
    stream.write("solid pic" + "\n")
  
    /*
@@ -254,7 +278,6 @@ function writeFacetBeginning (stream) {
       writeFacetEnd(stream);
    }
    
-    
    //Bottom-Left corner
    if (pixelValues[(pixelValues.length-1)][0] != 0)
    {
@@ -314,7 +337,8 @@ function writeFacetBeginning (stream) {
       stream.write("vertex " + 1*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
       stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
       writeFacetEnd(stream);
-    }
+   }
+
    //Bottom-right corner
    if (pixelValues[(pixelValues.length-1)][(pixelValues[0].length-1)] != 0)
    {
@@ -335,13 +359,13 @@ function writeFacetBeginning (stream) {
       writeFacetEnd(stream);
    }
    
- 
+
     //Creating the base. Every pixel along the edge except the first and last will be used to create 2 facets. Facet 1 consits of the point, the point changed to a value of zero, and the last point. Facet 2 consists of the point, the next point changed to a value of zero, and the point changed to a value of 0;
    for (let row = 1; row < (pixelValues.length-1); row++)
    {
       //Left edge
-      if (pixelValues[row][0] != 0)
-      {   
+      //if (pixelValues[row][0] != 0)
+      //{   
          //Sides
       
          writeFacetBeginning(stream);
@@ -364,10 +388,13 @@ function writeFacetBeginning (stream) {
          stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
          stream.write("vertex " + (row+1)*xScale + " " + 0 + " " + 0 + "\n")
          writeFacetEnd(stream);
-      }
+
+         currentProgress += 3
+         postMessage([(currentProgress)/maxProgress])
+      //}
       //Right edge
-      if (pixelValues[row][(pixelValues[0].length-1)] != 0)
-      {
+      //if (pixelValues[row][(pixelValues[0].length-1)] != 0)
+      //{
          //Sides
          
          writeFacetBeginning(stream);
@@ -389,13 +416,17 @@ function writeFacetBeginning (stream) {
          stream.write("vertex " + (row+1)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
          stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
          writeFacetEnd(stream);
-      }
+
+         
+         currentProgress += 3
+         postMessage([(currentProgress)/maxProgress])
+      //}
     }
    for (let col = 1; col < (pixelValues[0].length-1); col++)
    {
       //Top edge
-      if (pixelValues[0][col] != 0)
-      {
+      //if (pixelValues[0][col] != 0)
+      //{
          
          //Sides
          
@@ -418,10 +449,14 @@ function writeFacetBeginning (stream) {
          stream.write("vertex " + 0 + " " + (col+1)*yScale + " " + 0 + "\n")
          stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
          writeFacetEnd(stream);
-      }
+
+         
+         currentProgress += 3
+         postMessage([(currentProgress)/maxProgress])
+      //}
       //Bottom edge
-      if (pixelValues[(pixelValues.length-1)][col] != 0)
-      {
+      //if (pixelValues[(pixelValues.length-1)][col] != 0)
+      //{
          //Sides
          
          writeFacetBeginning(stream);
@@ -443,8 +478,16 @@ function writeFacetBeginning (stream) {
          stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (col+1)*yScale + " " + 0 + "\n")
          writeFacetEnd(stream);
-      }
+
+         
+         currentProgress += 3
+         postMessage([(currentProgress)/maxProgress])
+      //}
    }
+
+   console.log(currentProgress)
+   console.log(maxProgress)
+   console.log(currentProgress/maxProgress)
  
    stream.write("endsolid pic" + "\n")
 }
