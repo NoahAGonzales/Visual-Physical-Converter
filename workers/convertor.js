@@ -78,16 +78,16 @@ function writeFacetBeginning (stream) {
    //Adjusting maxProgress for values of 0
    for (let row = 1; row < (pixelValues.length-1); row++) {
       //Left edge
-      if (pixelValues[row][0] != 0)
+      if (pixelValues[row][0] == 0)
          maxProgress -= 3
       //Right edge
-      if (pixelValues[row][(pixelValues[0].length-1)] != 0)
+      if (pixelValues[row][(pixelValues[0].length-1)] == 0)
          maxProgress -= 3
    }
    for (let col = 1; col < (pixelValues[0].length-1); col++) {
-      if (pixelValues[0][col] != 0) 
+      if (pixelValues[0][col] == 0) 
          maxProgress -= 3
-      if (pixelValues[(pixelValues.length-1)][col] != 0)
+      if (pixelValues[(pixelValues.length-1)][col] == 0)
          maxProgress -= 3
    }
 
@@ -130,22 +130,22 @@ function writeFacetBeginning (stream) {
              \ |
                *
          */
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n")
          stream.write("vertex " + (row-1)*xScale + " " + col*yScale + " " + (pixelValues[(row-1)][col] * height + baseHeight) + "\n")
          stream.write("vertex " + (row-1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[row-1][col-1] * height + baseHeight) + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
  
          /* Top-Left
             *
             | \
             *--*
          */
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n")
          stream.write("vertex " + (row-1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[(row-1)][col - 1] * height + baseHeight) + "\n")
          stream.write("vertex " + row*xScale + " " + (col-1)*yScale + " " + (pixelValues[row][col-1] * height + baseHeight) + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
 
          postMessage([(++currentProgress)/maxProgress])
  
@@ -156,22 +156,22 @@ function writeFacetBeginning (stream) {
          */
          if (col+1 < pixelValues[0].length) //Is this pixel not on the last column
          {
-            writeFacetBeginning(stream);
+            writeFacetBeginning(stream)
             stream.write("vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n")
             stream.write("vertex " + (row-1)*xScale + " " + (col+1)*yScale + " " + (pixelValues[(row-1)][col + 1] * height + baseHeight) + "\n")
             stream.write("vertex " + (row-1)*xScale + " " + col*yScale + " " + (pixelValues[(row-1)][col] * height + baseHeight) + "\n")
-            writeFacetEnd(stream);
+            writeFacetEnd(stream)
  
             /* Top-Right
                   *
                 / |
                *--*
             */
-            writeFacetBeginning(stream);
+            writeFacetBeginning(stream)
             stream.write("vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n")
             stream.write("vertex " + row*xScale + " " + (col+1)*yScale + " " + (pixelValues[row][col + 1] * height + baseHeight) + "\n")
             stream.write("vertex " + (row-1)*xScale + " " + (col+1)*yScale + " " + (pixelValues[(row-1)][col + 1] * height + baseHeight) + "\n")
-            writeFacetEnd(stream);
+            writeFacetEnd(stream)
          }
 
          postMessage([(++currentProgress)/maxProgress])
@@ -183,22 +183,22 @@ function writeFacetBeginning (stream) {
                 / |
                *--*
             */
-            writeFacetBeginning(stream);
+            writeFacetBeginning(stream)
             stream.write("vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n")
             stream.write("vertex " + (row+1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[row + 1][col - 1] * height + baseHeight) + "\n")
             stream.write("vertex " + (row+1)*xScale + " " + col*yScale + " " + (pixelValues[row + 1][col] * height + baseHeight) + "\n")
-            writeFacetEnd(stream);
+            writeFacetEnd(stream)
  
             /* Bottom-Left
                *--*
                | /
                *
             */
-            writeFacetBeginning(stream);
+            writeFacetBeginning(stream)
             stream.write("vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n")
             stream.write("vertex " + row*xScale + " " + (col-1)*yScale + " " + (pixelValues[row][col - 1] * height + baseHeight) + "\n")
             stream.write("vertex " + (row+1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[row + 1][col - 1] * height + baseHeight) + "\n")
-            writeFacetEnd(stream);
+            writeFacetEnd(stream)
          }
 
          postMessage([(++currentProgress)/maxProgress])
@@ -210,22 +210,22 @@ function writeFacetBeginning (stream) {
                | \
                *--*
             */
-            writeFacetBeginning(stream);
+            writeFacetBeginning(stream)
             stream.write("vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n")
             stream.write("vertex " + (row+1)*xScale + " " + col*yScale + " " + (pixelValues[row + 1][col] * height + baseHeight) + "\n")
             stream.write("vertex " + (row+1)*xScale + " " + (col+1)*yScale + " " + (pixelValues[row + 1][col + 1] * height + baseHeight) + "\n")
-            writeFacetEnd(stream);
+            writeFacetEnd(stream)
  
             /* Bottom-Right
                *--*
                 \ |
                   *
             */
-            writeFacetBeginning(stream);
+            writeFacetBeginning(stream)
             stream.write("vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n")
             stream.write("vertex " + (row+1)*xScale + " " + (col+1)*yScale + " " + (pixelValues[row + 1][col + 1] * height + baseHeight) + "\n")
             stream.write("vertex " + row*xScale + " " + (col+1)*yScale + " " + (pixelValues[row][col + 1] * height + baseHeight) + "\n")
-            writeFacetEnd(stream);
+            writeFacetEnd(stream)
          }
  
          postMessage([(++currentProgress)/maxProgress])
@@ -239,125 +239,125 @@ function writeFacetBeginning (stream) {
    let centerY = ((pixelValues[0].length-1))*yScale / 2.0;
  
    //Top-left corner
-   if (pixelValues[0][0] != 0)
-   {
+   //if (pixelValues[0][0] != 0)
+   //{
       //Sides
       
       //Left edge going across rows
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + 0 + " " + 0 + " " + (pixelValues[0][0] * height + baseHeight) + "\n")
       stream.write("vertex " + 0 + " " + 0 + " " + 0 + "\n")
       stream.write("vertex " + 1*xScale + " " + 0 + " " + 0 + "\n")
-      writeFacetEnd(stream);
+      writeFacetEnd(stream)
  
       //Top edge going across columns
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + 0 + " " + 0 + " " + (pixelValues[0][0] * height + baseHeight) + "\n")
       stream.write("vertex " + 0 + " " + 1*yScale + " " + 0 + "\n")
       stream.write("vertex " + 0 + " " + 0 + " " + 0 + "\n")
-      writeFacetEnd(stream);
+      writeFacetEnd(stream)
  
       
       //Bottom
 
       //Left edge going across rows
       
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + 0 + " " + 0 + " " + 0 + "\n")
       stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
       stream.write("vertex " + 1*xScale + " " + 0 + " " + 0 + "\n")
-      writeFacetEnd(stream);
+      writeFacetEnd(stream)
       
  
       //Top edge going across columns
       
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + 0 + " " + 0 + " " + 0 + "\n")
       stream.write("vertex " + 0 + " " + 1*yScale + " " + 0 + "\n")
       stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
-      writeFacetEnd(stream);
-   }
+      writeFacetEnd(stream)
+   //}
    
    //Bottom-Left corner
-   if (pixelValues[(pixelValues.length-1)][0] != 0)
-   {
+   //if (pixelValues[(pixelValues.length-1)][0] != 0)
+   //{
       //Sides
        
       //Left edge going across rows
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + 0 + " " + (pixelValues[(pixelValues.length-1)][0] * height + baseHeight) + "\n")
       stream.write("vertex " + (pixelValues.length - 2)*xScale + " " + 0 + " " + (pixelValues[(pixelValues.length-1)][0] * height + baseHeight) + "\n")
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + 0 + " " + 0 + "\n")
-      writeFacetEnd(stream);
+      writeFacetEnd(stream)
  
       //Bottom edge going across columns
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + 0 + " " + (pixelValues[(pixelValues.length-1)][0] * height + baseHeight) + "\n")
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + 0 + " " + 0 + "\n")
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + 1*yScale + " " + 0 + "\n")
-      writeFacetEnd(stream);
+      writeFacetEnd(stream)
  
       
       //Bottom
  
       //Bottom edge going across columns
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + 0 + " " + 0 + "\n")
       stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + 1*yScale + " " + 0 + "\n")
-      writeFacetEnd(stream);
-   }
+      writeFacetEnd(stream)
+   //}
     
    //Top-right corner
-   if (pixelValues[0][(pixelValues[0].length-1)] != 0)
-   {
+   //if (pixelValues[0][(pixelValues[0].length-1)] != 0)
+   //{
       
       //Sides
  
       //Top edge going across columns
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + 0 + " " + (pixelValues[0].length-1)*yScale + " " + (pixelValues[0][(pixelValues[0].length-1)] * height + baseHeight) + "\n")
       stream.write("vertex " + 0 + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
       stream.write("vertex " + 0 + " " + (pixelValues[0].length-2)*yScale + " " + (pixelValues[0][pixelValues[0].length-2] * height + baseHeight) + "\n")
-      writeFacetEnd(stream);
+      writeFacetEnd(stream)
        
       //Right edge going across rows
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + 0 + " " + (pixelValues[0].length-1)*yScale + " " + (pixelValues[0][(pixelValues[0].length-1)] * height + baseHeight) + "\n")
       stream.write("vertex " + 1*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
       stream.write("vertex " + 0 + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
-      writeFacetEnd(stream);
+      writeFacetEnd(stream)
        
       
       //Bottom
  
       //Right edge going across rows
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + 0 + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
       stream.write("vertex " + 1*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
       stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
-      writeFacetEnd(stream);
-   }
+      writeFacetEnd(stream)
+   //}
 
    //Bottom-right corner
-   if (pixelValues[(pixelValues.length-1)][(pixelValues[0].length-1)] != 0)
-   {
+   //if (pixelValues[(pixelValues.length-1)][(pixelValues[0].length-1)] != 0)
+   //{
       //Sides
       
       //Right edge going across rows
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + (pixelValues[(pixelValues.length-1)][(pixelValues[0].length-1)] * height + baseHeight) + "\n")
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
       stream.write("vertex " + (pixelValues.length-2)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + (pixelValues[pixelValues.length-2][(pixelValues[0].length-1)] * height + baseHeight) + "\n")
-      writeFacetEnd(stream);
+      writeFacetEnd(stream)
  
       //Bottom edge going across columns
-      writeFacetBeginning(stream);
+      writeFacetBeginning(stream)
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + (pixelValues[(pixelValues.length-1)][(pixelValues[0].length-1)] * height + baseHeight) + "\n")
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (pixelValues[0].length-2)*yScale + " " + (pixelValues[(pixelValues.length-1)][pixelValues[0].length - 2] * height + baseHeight) + "\n")
       stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
-      writeFacetEnd(stream);
-   }
+      writeFacetEnd(stream)
+   //}
    
 
     //Creating the base. Every pixel along the edge except the first and last will be used to create 2 facets. Facet 1 consits of the point, the point changed to a value of zero, and the last point. Facet 2 consists of the point, the next point changed to a value of zero, and the point changed to a value of 0;
@@ -368,26 +368,26 @@ function writeFacetBeginning (stream) {
       //{   
          //Sides
       
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + row*xScale + " " + 0 + " " + (pixelValues[row][0] * height + baseHeight) + "\n")
          stream.write("vertex " + (row-1)*xScale + " " + 0 + " " + (pixelValues[(row-1)][0] * height + baseHeight) + "\n")
          stream.write("vertex " + row*xScale + " " + 0 + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
  
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + row*xScale + " " + 0 + " " + (pixelValues[row][0] * height + baseHeight) + "\n")
          stream.write("vertex " + row*xScale + " " + 0 + " " + 0 + "\n")
          stream.write("vertex " + (row+1)*xScale + " " + 0 + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
  
          
          //Bottom
          
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + row*xScale + " " + 0 + " " + 0 + "\n")
          stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
          stream.write("vertex " + (row+1)*xScale + " " + 0 + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
 
          currentProgress += 3
          postMessage([(currentProgress)/maxProgress])
@@ -397,25 +397,25 @@ function writeFacetBeginning (stream) {
       //{
          //Sides
          
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + row*xScale + " " + (pixelValues[0].length-1)*yScale + " " + (pixelValues[row][(pixelValues[0].length-1)] * height + baseHeight) + "\n")
          stream.write("vertex " + row*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
          stream.write("vertex " + (row-1)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + (pixelValues[row-1][(pixelValues[0].length-1)] * height + baseHeight) + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
  
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + row*xScale + " " + (pixelValues[0].length-1)*yScale + " " + (pixelValues[row][(pixelValues[0].length-1)] * height + baseHeight) + "\n")
          stream.write("vertex " + (row+1)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
          stream.write("vertex " + row*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
  
          //Bottom
          
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + row*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
          stream.write("vertex " + (row+1)*xScale + " " + (pixelValues[0].length-1)*yScale + " " + 0 + "\n")
          stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
 
          
          currentProgress += 3
@@ -430,25 +430,25 @@ function writeFacetBeginning (stream) {
          
          //Sides
          
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + 0 + " " + col*yScale + " " + (pixelValues[0][col] * height + baseHeight) + "\n")
          stream.write("vertex " + 0 + " " + col*yScale + " " + 0 + "\n")
          stream.write("vertex " + 0 + " " + (col-1)*yScale + " " + (pixelValues[0][col-1] * height + baseHeight) + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
  
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + 0 + " " + col*yScale + " " + (pixelValues[0][col] * height + baseHeight) + "\n")
          stream.write("vertex " + 0 + " " + (col+1)*yScale + " " + 0 + "\n")
          stream.write("vertex " + 0 + " " + col*yScale + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
  
          // Bottom
          
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + 0 + " " + col*yScale + " " + 0 + "\n")
          stream.write("vertex " + 0 + " " + (col+1)*yScale + " " + 0 + "\n")
          stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
 
          
          currentProgress += 3
@@ -459,25 +459,25 @@ function writeFacetBeginning (stream) {
       //{
          //Sides
          
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + col*yScale + " " + (pixelValues[(pixelValues.length-1)][col] * height + baseHeight) + "\n")
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[(pixelValues.length-1)][col - 1] * height + baseHeight) + "\n")
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + col*yScale + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
  
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + col*yScale + " " + (pixelValues[(pixelValues.length-1)][col] * height + baseHeight) + "\n")
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + col*yScale + " " + 0 + "\n")
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (col+1)*yScale + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
          
          //Bottom
          
-         writeFacetBeginning(stream);
+         writeFacetBeginning(stream)
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + col*yScale + " " + 0 + "\n")
          stream.write("vertex " + centerX + " " + centerY + " " + 0 + "\n")
          stream.write("vertex " + (pixelValues.length-1)*xScale + " " + (col+1)*yScale + " " + 0 + "\n")
-         writeFacetEnd(stream);
+         writeFacetEnd(stream)
 
          
          currentProgress += 3
