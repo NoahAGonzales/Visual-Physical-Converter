@@ -37,7 +37,12 @@ ipcRenderer.on("file path", function(event, data) {
  * Converting
  */
 
- function convertFile() {
+function convertFile() {
+  let scale = parseFloat(document.getElementById('scale-text-input').value)
+  let height = parseFloat(document.getElementById('height-text-input').value)
+  let baseHeight = parseFloat(document.getElementById('base-height-text-input').value)
+  let smoothN = parseFloat(document.getElementById('smoothing-text-input').value)
+
 	// Not converting if there is no file selected
 	if(filePath != null) {
 		// The mat for image analysis
@@ -50,7 +55,7 @@ ipcRenderer.on("file path", function(event, data) {
 				pixelValues[i][j] = src.ucharAt(i, j * src.channels())
 			}
 		}
-		worker.postMessage([filePath, fileName, pixelValues])
+		worker.postMessage([filePath, fileName, pixelValues, scale, height, baseHeight, smoothN])
 	}
 }
 

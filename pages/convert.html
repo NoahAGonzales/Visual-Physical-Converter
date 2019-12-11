@@ -4,12 +4,27 @@
       <title>File Select</title>
       <link rel="stylesheet" href="../css/convert.css"/>
       <script type="text/javascript" src="../workers/convertor.js"></script>
+      <script type="text/javascript" src="../js/inputFilters.js"></script>
    </head>
    <body>
       <button id="select-file-button" onclick="selectFile()">Select File</button>
       <p id="filename"></p>
+      <form>
+            <label for="scale-text-input">Scale</label>
+            <input id="scale-text-input" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)">
+   
+            <label for="height-text-input">Height</label> 
+            <input id="height-text-input" type="text" name="height-text-input" value="5" onkeypress="return filterHeightInput(event)">
+   
+            <label for="base-height-text-input">Base Height</label> 
+            <input id="base-height-text-input" type="text" name="base-height-text-input" value="1" onkeypress="return filterBaseHeightInput(event)">
+
+            <label for="smoothing-text-input">Smoothing</label> 
+            <input id="smoothing-text-input" type="text" name="smoothing-text-input" value="1" onkeypress="return filterSmoothingInput(event)">
+      </form>
       <div id="progress-bar" style="--width: 2%"></div>
       <button id="test" onclick="convertFile()">Convert</button>
+
       <!-- Excluded from page -->
       <img id="img-for-analysis" src=""/>
       <!-- Scripts -->

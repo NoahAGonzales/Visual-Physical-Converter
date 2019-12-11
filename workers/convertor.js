@@ -2,11 +2,20 @@ const fs = require ('fs')
 const cv = require('../js/opencv')
 
 let pixelValues = null
+let userScale = 0
+let userHeight = 0
+let userBaseHeight = 0
+let userSmoothN = 0
 
 /**
- * All messages to this worker will be to convert something. Of which the message will consist of an array with the following elements in this order:
+ * All messages to this worker will be for converting something. The message will consist of an array with the following elements in this order:
  *    0) The file path of the selected image
  *    1) The file name of the selected image (can be determined from the file path, but has already been computed)
+ *    2) A 2-dimensional array of the values of the pixels
+ *    3) The scale
+ *    4) The height
+ *    5) The base height
+ *    6) Smoothing passes
  */
 onmessage = function (e) {
    //Creating the write stream
@@ -14,9 +23,13 @@ onmessage = function (e) {
 
    //Setup
    pixelValues = e.data[2]
+   userScale = e.data[3]
+   userHeight = e.data[4]
+   userBaseHeight = e.data[5]
+   userSmoothN = e.data[6]
 
    //Process
-   smooth(1)
+   smooth(userSmoothN)
 
    //Convert
    convert(stream)
@@ -47,11 +60,11 @@ function smooth(n) {
   */
  function convert(stream) {
    // Settings
-   let baseHeight = 1
-   let scale = 2
+   let baseHeight = userBaseHeight
+   let scale = userScale
 
    //Adjustments
-   let height = 1/255 * 0.1
+   let height = 1/255 * userHeight
    let xScale = 1 / ((pixelValues.length-1 > pixelValues[0].length-1) ? (pixelValues.length-1) : (pixelValues[0].length-1)) * scale //Scale based on the larger of the dimensions
    let yScale = 1 / ((pixelValues.length-1 > pixelValues[0].length-1) ? (pixelValues.length-1) : (pixelValues[0].length-1)) * scale //Scale based on the larger of the dimensions
    
@@ -177,22 +190,24 @@ function smooth(n) {
                 / |
                *--*
             */
-            stream.write("facet normal 0 0 0" + "\n" + "outer loop" + "\n" +
-            "vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n" +
-            "vertex " + (row+1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[row + 1][col - 1] * height + baseHeight) + "\n" +
-            "vertex " + (row+1)*xScale + " " + col*yScale + " " + (pixelValues[row + 1][col] * height + baseHeight) + "\n" +
-            "endloop" + "\n" + "endfacet" + "\n" +
+            stream.write(
+               "facet normal 0 0 0" + "\n" + "outer loop" + "\n" +
+               "vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n" +
+               "vertex " + (row+1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[row + 1][col - 1] * height + baseHeight) + "\n" +
+               "vertex " + (row+1)*xScale + " " + col*yScale + " " + (pixelValues[row + 1][col] * height + baseHeight) + "\n" +
+               "endloop" + "\n" + "endfacet" + "\n" +
 
-            /* Bottom-Left
-               *--*
-               | /
-               *
-            */
-            "facet normal 0 0 0" + "\n" + "outer loop" + "\n" +
-            "vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n" +
-            "vertex " + row*xScale + " " + (col-1)*yScale + " " + (pixelValues[row][col - 1] * height + baseHeight) + "\n" +
-            "vertex " + (row+1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[row + 1][col - 1] * height + baseHeight) + "\n" +
-            "endloop" + "\n" + "endfacet" + "\n")
+               /* Bottom-Left
+                  *--*
+                  | /
+                  *
+               */
+               "facet normal 0 0 0" + "\n" + "outer loop" + "\n" +
+               "vertex " + row*xScale + " " + col*yScale + " " + (pixelValues[row][col] * height + baseHeight) + "\n" +
+               "vertex " + row*xScale + " " + (col-1)*yScale + " " + (pixelValues[row][col - 1] * height + baseHeight) + "\n" +
+               "vertex " + (row+1)*xScale + " " + (col-1)*yScale + " " + (pixelValues[row + 1][col - 1] * height + baseHeight) + "\n" +
+               "endloop" + "\n" + "endfacet" + "\n"
+            )
             
             currentProgress+=2
             postMessage([(currentProgress)/maxProgress])
