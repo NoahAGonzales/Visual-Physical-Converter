@@ -30,6 +30,8 @@ ipcRenderer.on("file path", function(event, data) {
     document.getElementById('filename').innerHTML=fileName
     // Setting the image for analysis
     document.getElementById('img-for-analysis').src = filePath
+    //Resetting the progress bar
+    updateProgressBar(0)
   }
 })
 
@@ -37,9 +39,21 @@ ipcRenderer.on("file path", function(event, data) {
  * Converting
  */
 
- function convertFile() {
+function convertFile() {
+  let scale = parseFloat(document.getElementById('scale-text-input').value)
+  let height = parseFloat(document.getElementById('height-text-input').value)
+  let baseHeight = parseFloat(document.getElementById('base-height-text-input').value)
+  let smoothN = parseFloat(document.getElementById('smoothing-text-input').value)
+
 	// Not converting if there is no file selected
 	if(filePath != null) {
+    //Disabling text boxes
+    document.getElementById('scale-text-input').disabled = true
+    document.getElementById('height-text-input').disabled = true
+    document.getElementById('base-height-text-input').disabled = true
+    document.getElementById('smoothing-text-input').disabled = true
+    document.getElementById('select-file-button').disabled = true
+
 		// The mat for image analysis
 		let src = cv.imread('img-for-analysis', cv.IMREAD_GRAYSCALE)
 		// Variable to hold the pixel values of the image
@@ -50,7 +64,7 @@ ipcRenderer.on("file path", function(event, data) {
 				pixelValues[i][j] = src.ucharAt(i, j * src.channels())
 			}
 		}
-		worker.postMessage([filePath, fileName, pixelValues])
+		worker.postMessage([filePath, fileName, pixelValues, scale, height, baseHeight, smoothN])
 	}
 }
 
@@ -81,5 +95,14 @@ function updateProgressBar (newWidth) {
  */
 worker.onmessage = function (e) {
   updateProgressBar(e.data[0])
+
+  // Enable other functions
+  if(e.data.length > 1) {
+    document.getElementById('select-file-button').disabled = false
+    document.getElementById('scale-text-input').disabled = false
+    document.getElementById('height-text-input').disabled = false
+    document.getElementById('base-height-text-input').disabled = false
+    document.getElementById('smoothing-text-input').disabled = false
+  }
 }
 

@@ -7,8 +7,8 @@ let win
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     webPreferences: {
       nodeIntegration: true,
       nodeIntegrationWorker: true,
@@ -70,14 +70,6 @@ let selectFile = async(event) => {
 ipcMain.on('selectFile', function(event, data) {
   selectFile(event)
 })
-
-
-
-
-onmessage = function(e) {
-  this.console.log(e)
-}
-
 
 
 
