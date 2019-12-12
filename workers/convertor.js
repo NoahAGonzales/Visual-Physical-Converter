@@ -36,7 +36,9 @@ onmessage = function (e) {
 
    //Cleaning up
    stream.end()
-   self.close()
+   postMessage([100, false])
+
+   //self.close()
 }
 
 /**
