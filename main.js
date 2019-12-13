@@ -14,13 +14,24 @@ function createWindow () {
       nodeIntegrationWorker: true,
       nodeIntegrationInWorker: true,
     }
-  })
+  })  
 
   // and load the index.html of the app.
   win.loadFile('index.html')
 
   // Open the DevTools.
   win.webContents.openDevTools()
+
+  //Resizing
+  var tmpSize = [0,0];
+
+    win.on('resize', (e)=>{
+        var size = win.getSize()
+        if( Math.abs(size[0]-tmpSize[0]) > 2 || Math.abs(size[1]-tmpSize[1]) > 2){
+          win.setSize(size[0], parseInt(size[0] * 9.4 / 16))
+        }
+      tmpSize = size;
+  });
 
   // Emitted when the window is closed.
   win.on('closed', () => {

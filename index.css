@@ -6,19 +6,38 @@ body {
    margin: 0;
    padding: 0;
 }
+
 a {
    text-decoration: none;
+   color: black;
 }
+
+#background {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   /*background-image: url(./images/silhouette-of-mountains-1323550.jpg);*/
+   background-image: url(./images/landscape-photo-of-mountain-with-polar-lights-1434608.jpg);
+
+   background-size: cover;
+   z-index: -1;
+   filter: grayscale(100%);
+
+   transition: filter;
+   transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+   transition-duration: 1s;
+}
+
 #get-started-button {
-   width: 15vw;
-   margin-top: 20vh;
-   margin-left: 60vw;
+   left: 65vw;
+   top: 10vh;
+   position: relative;
+   width: 11vw;
    background-color: rgba(0, 0, 0, 0);
-   border: none;
-   border-radius: 25vw; 
    opacity: 0;
    animation-name: fade-in;
-   animation-delay: 10s;
    animation-duration: 1s;
    animation-iteration-count: 1;
    animation-fill-mode: forwards;
@@ -30,13 +49,19 @@ a {
    transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
    transition-duration: 1s;
 }
-#get-started-button:hover {
+
+#get-started-button:hover{
    transform: translateX(.4vw);
 }
+
+#get-started-button:hover ~ #background {
+   filter: grayscale(0%);
+}
+
 #main-text-wrapper {
-   margin-top: 25vh;
-   margin-left: 10vw;
    padding: 0;
+   padding-top: 17vh;
+   margin-left: 15vw;
 }
 #main-text {
    margin: 0;
@@ -44,28 +69,16 @@ a {
    font-family: "Orkney Bold";
    font-size: 6vw;
 }
-#text-You {
-   animation-delay: 0;
-   animation-fill-mode: forwards;
-   transform: rotate3d(0,0,0,0);
-}
-#text-We {
-   animation-delay: 3s;
-}
-#text-see {
-   animation-delay: 0;
-}
 #text-feel {
-   animation-delay: 3s;
+   animation-delay: 0s;
 }
 #text-experience {
-   animation-delay: 6s;
+   animation-delay: 3s;
 }
 #button-text {
    font-size: 2vw;
    font-family: "Orkney Medium";
 }
-
 .sliding-vertical {
    display:inline;
 }
@@ -73,23 +86,21 @@ a {
    animation-name: rotate;
    animation-duration: 6s;
    animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
-   animation-iteration-count: 1;
+   animation-iteration-count: infinite;
    opacity: 0;
    overflow: hidden;
    position: absolute;
    transform: rotate3d(1, 0, 0, 90deg);
 }
 .rotating-text-last {
-   animation-name: rotate-last;
+   animation-name: rotate;
    animation-duration: 6s;
    animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
-   animation-iteration-count: 1;
+   animation-iteration-count: infinite;
    opacity: 0;
    overflow: hidden;
    position: absolute;
-   animation-fill-mode: forwards;
 }
-
 
 
 @keyframes rotate {
