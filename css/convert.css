@@ -1,17 +1,80 @@
-@font-face {font-family: "Orkney Light"; src: url('./fonts/orkney/Orkney\ Light.ttf')}
-@font-face {font-family: "Orkney Medium"; src: url('./fonts/orkney/Orkney\ Medium.ttf')}
-@font-face {font-family: "Orkney Bold"; src: url('./fonts/orkney/Orkney\ Bold.ttf')}
+@font-face {font-family: "Orkney Light"; src: url('../fonts/orkney/Orkney\ Light.ttf')}
+@font-face {font-family: "Orkney Medium"; src: url('../fonts/orkney/Orkney\ Medium.ttf')}
+@font-face {font-family: "Orkney Bold"; src: url('../fonts/orkney/Orkney\ Bold.ttf')}
 
 body {
    margin: 0;  
+   padding-top: 10vh;
    height: 100%;
    overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+body > div {
+   margin-bottom: 10vh;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+
+body > div > div {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+}
+
+
+button {
+   padding: 1vw;
+   margin-left: 5vw;
+   margin-right: 5vw;
+
+   border-radius: 100vw;
+   width: 10vw;
+   height: 10vw;
+   background: none;
+   border-color: white;
+   color: white;
+   font-family: "Orkney Medium";
+   font-size: 2vw;
+}
+
+form {
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+#background {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   /*background-image: url(./images/silhouette-of-mountains-1323550.jpg);*/
+   background-image: url(../images/landscape-photo-of-mountain-with-polar-lights-1434608.jpg);
+
+   background-size: cover;
+   z-index: -1;
+}
+
+#filename {
+   color: white;
+   font-size: 1.5vw;
+   font-family: "Orkney-Medium";
 }
 
 #progress-bar {
    width: 50vw;
    height: 5vh;
    background-color: black;
+   border-color: white;
    border-radius: 5vw;
    position: relative
 }
@@ -22,13 +85,43 @@ body {
    left: 1vw;
    top: 1vh;
    bottom: 1vh;
-   min-width: 0.1vw;
+   min-width: 3%;
    max-width: calc(100% - 2vw);
-   background-color: red;
+   background-image: linear-gradient(90deg, #dd5e89,#f7bb97);
    border-radius: 10000vw;
 }
 #img-for-analysis {
    margin-top: 100vh;
    opacity: 0;
    position: fixed;
+}
+
+.input-label {
+   font-size: 2vw;
+   color: white;
+   font-family: "Orkney Medium";
+}
+
+.input-text-box {
+   width: 15vw;
+   border: none;
+   background-color: rgba(255, 255, 255, .3);
+   border-radius: 50vw;
+   padding-left: 1.5vw;
+   padding-right: 1.5vw;
+   padding-top: .5vh;
+   padding-bottom: .5vh;
+   margin-top: 1vh;
+   font-family: "Orkney Medium";
+   font-size: 2vw;
+   text-align: center;
+}
+
+.input-wrapper {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   margin-left: 3vw;
+   margin-right: 3vw;
 }
