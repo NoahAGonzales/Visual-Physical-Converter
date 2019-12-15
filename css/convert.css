@@ -2,6 +2,11 @@
 @font-face {font-family: "Orkney Medium"; src: url('../fonts/orkney/Orkney\ Medium.ttf')}
 @font-face {font-family: "Orkney Bold"; src: url('../fonts/orkney/Orkney\ Bold.ttf')}
 
+* {
+   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+   outline: none;
+}
+
 body {
    margin: 0;  
    padding-top: 10vh;
@@ -39,9 +44,19 @@ button {
    height: 10vw;
    background: none;
    border-color: white;
+   border-style: ridge;
    color: white;
    font-family: "Orkney Medium";
    font-size: 2vw;
+   background-color: rgba(255, 255, 255, 0);
+
+   transition: background-color;
+   transition-duration: 1s;
+   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+button:hover {
+   background-color: rgba(255, 255, 255, .15);
 }
 
 form {
@@ -67,28 +82,33 @@ form {
 #filename {
    color: white;
    font-size: 1.5vw;
-   font-family: "Orkney-Medium";
+   font-family: "Orkney Medium";
+   position: absolute;
+   margin-top: auto;
+   margin-bottom: auto;
+   z-index: 1;
 }
 
 #progress-bar {
    width: 50vw;
    height: 5vh;
-   background-color: black;
+   border-style: ridge;
    border-color: white;
-   border-radius: 5vw;
+   border-width: 2;
+   border-radius: 100vw;
    position: relative
 }
 #progress-bar::before {
    content: "";
    width: calc(var(--width, 0) * 1%);
    position: absolute;
-   left: 1vw;
-   top: 1vh;
-   bottom: 1vh;
-   min-width: 3%;
-   max-width: calc(100% - 2vw);
-   background-image: linear-gradient(90deg, #dd5e89,#f7bb97);
-   border-radius: 10000vw;
+   left: 0vw;
+   top: 0vh;
+   bottom: 0vh;
+   min-width: 5%;
+   max-width: calc(100%);
+   background-image: linear-gradient(90deg, #dd5e89, #f7bb97);
+   border-radius: 100vw;
 }
 #img-for-analysis {
    margin-top: 100vh;
