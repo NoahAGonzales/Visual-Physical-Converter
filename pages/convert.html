@@ -7,9 +7,9 @@
       <script type="text/javascript" src="../js/inputFilters.js"></script>
    </head>
    <body>
-      <div>
+      <div id="functions-wrapper">
          <button id="select-file-button" onclick="selectFile()" tabindex="0">Select File</button>
-         <div>
+         <div id="progress-bar-wrapper">
             <p id="filename">You have not selected a file yet!</p>
             <div id="progress-bar" style="--width: 2%"></div>
          </div>
@@ -40,7 +40,7 @@
             <label for="base-height-text-input" class="input-label">Base Height</label> 
             <input id="base-height-text-input" class="input-text-box" type="text" name="base-height-text-input" value="1" onkeypress="return filterBaseHeightInput(event)" tabindex="3"> 
             <div class="popup">
-               <span>The height of the required base.</span>
+               <span>The height of the required solid base</span>
             </div>
          </div>
 
@@ -53,12 +53,12 @@
          </div>
       </form>
 
-      <div>
-         <span class="error-box">Scale cannot be empty!</span>
-         <span class="error-box">Height cannot be empty!</span>
-         <span class="error-box">Base height cannot be empty!</span>
-         <span class="error-box">Smoothing cannot be empty!</span>
-      </div>
+      <div id="error-box">The following fields must be filled:&nbsp
+         <span id="scale-error"></span>
+         <span id="height-error"></span>
+         <span id="base-height-error"></span>
+         <span id="smoothing-error"></span>
+      </div>   
 
       <div id="background"></div>
 

@@ -1,164 +1,200 @@
-@font-face {
-	font-family: "Orkney Bold";
-}
+@font-face {font-family: "Orkney Light"; src: url('../fonts/orkney/Orkney\ Light.ttf')}
+@font-face {font-family: "Orkney Medium"; src: url('../fonts/orkney/Orkney\ Medium.ttf')}
+@font-face {font-family: "Orkney Bold"; src: url('../fonts/orkney/Orkney\ Bold.ttf')}
+
 * {
-	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-	outline: none;
+   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+   outline: none;
 }
+
 body {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	margin: 0;
-	overflow: hidden;
-	padding-top: 10vh;
+   margin: 0;  
+   padding-top: 10vh;
+   height: 100%;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
-body>div {
-	align-items: center;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	margin-bottom: 10vh;
+
+#functions-wrapper {
+   margin-bottom: 10vh;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
 }
-body>div>div {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
+
+#progress-bar-wrapper {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
 }
+
+
 button {
-	background: none;
-	background-color: rgba(255, 255, 255, 0);
-	border-color: white;
-	border-radius: 100vw;
-	border-style: ridge;
-	color: white;
-	font-family: "Orkney Medium";
-	font-size: 2vw;
-	height: 10vw;
-	margin-left: 5vw;
-	margin-right: 5vw;
-	padding: 1vw;
-	transition: background-color;
-	transition-duration: 1s;
-	transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-	width: 10vw;
+   padding: 1vw;
+   margin-left: 5vw;
+   margin-right: 5vw;
+
+   border-radius: 100vw;
+   width: 10vw;
+   height: 10vw;
+   background: none;
+   border-color: white;
+   border-style: ridge;
+   color: white;
+   font-family: "Orkney Medium";
+   font-size: 2vw;
+   background-color: rgba(255, 255, 255, 0);
+
+   transition: background-color;
+   transition-duration: 1s;
+   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+
 button:hover {
-	background-color: rgba(255, 255, 255, .15);
+   background-color: rgba(255, 255, 255, .15);
 }
+
 form {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	width: 100%;
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
 }
+
 #background {
-	background-image: url(../images/landscape-photo-of-mountain-with-polar-lights-1434608.jpg);
-	background-size: cover;
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: -1;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   /*background-image: url(./images/silhouette-of-mountains-1323550.jpg);*/
+   background-image: url(../images/landscape-photo-of-mountain-with-polar-lights-1434608.jpg);
+
+   background-size: cover;
+   z-index: -1;
 }
+
 #filename {
-	color: white;
-	font-family: "Orkney Medium";
-	font-size: 1.5vw;
-	margin-bottom: auto;
-	margin-top: auto;
-	position: absolute;
-	z-index: 1;
+   color: white;
+   font-size: 1.5vw;
+   font-family: "Orkney Medium";
+   position: absolute;
+   margin-top: auto;
+   margin-bottom: auto;
+   z-index: 1;
 }
+
 #progress-bar {
-	border-color: white;
-	border-radius: 100vw;
-	border-style: ridge;
-	border-width: 2;
-	height: 5vh;
-	width: 50vw;
+   width: 50vw;
+   height: 5vh;
+   border-style: ridge;
+   border-color: white;
+   border-width: 2;
+   border-radius: 100vw;
+   position: relative
 }
 #progress-bar::before {
-	background-image: linear-gradient(90deg, #dd5e89, #f7bb97);
-	border-radius: 100vw;
-	bottom: 0vh;
-	content: "";
-	left: 0vw;
-	max-width: calc(100%);
-	min-width: 5%;
-	position: absolute;
-	top: 0vh;
-	width: calc(var(--width, 0) * 1%);
+   content: "";
+   width: calc(var(--width, 0) * 1%);
+   position: absolute;
+   left: 0vw;
+   top: 0vh;
+   bottom: 0vh;
+   min-width: 5%;
+   max-width: calc(100%);
+   background-image: linear-gradient(90deg, #dd5e89, #f7bb97);
+   border-radius: 100vw;
 }
-.error-box {
-	background-color: rgba(255, 0, 0);
-	border-radius: 1vw;
-	color: black;
-	font-family: "Orkney Medium";
-	font-size: 1.5vw;
-	padding: 1vw;
+
+#error-box {
+   padding: 1vw;
+   background-color: rgba(235, 51, 73, 0.6);
+   color: white;
+   font-family: "Orkney Medium";
+   font-size: 1.5vw;
+   border-radius: 1.5vw;
+   text-align: center;
+   opacity: 0;
+   margin-top: 15vh;
+
+   transition: opacity;
+   transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
+   transition-duration: 1s;
 }
+
+
 #img-for-analysis {
-	margin-top: 100vh;
-	opacity: 0;
-	position: fixed;
+   margin-top: 100vh;
+   opacity: 0;
+   position: fixed;
 }
+
 .input-label {
-	color: white;
-	font-family: "Orkney Medium";
-	font-size: 2vw;
+   font-size: 2vw;
+   color: white;
+   font-family: "Orkney Medium";
 }
+
 .input-text-box {
-	background-color: rgba(255, 255, 255, .3);
-	border: none;
-	border-radius: 50vw;
-	font-family: "Orkney Medium";
-	font-size: 2vw;
-	margin-top: 1vh;
-	padding-bottom: .5vh;
-	padding-left: 1.5vw;
-	padding-right: 1.5vw;
-	padding-top: .5vh;
-	text-align: center;
-	width: 15vw;
+   width: 15vw;
+   border: none;
+   background-color: rgba(255, 255, 255, .3);
+   border-radius: 50vw;
+   padding-left: 1.5vw;
+   padding-right: 1.5vw;
+   padding-top: .5vh;
+   padding-bottom: .5vh;
+   margin-top: 1vh;
+   font-family: "Orkney Medium";
+   font-size: 2vw;
+   text-align: center;
 }
-.input-text-box:hover+.popup {
-	opacity: 100%;
+
+.input-text-box:hover + .popup {
+   opacity: 100%;
 }
+
 .popup {
-	background-color: rgba(255, 255, 255, .4);
-	border-radius: 1vw;
-	margin-top: 10%;
-	opacity: 0;
-	padding: 1vw;
-	position: relative;
-	text-align: center;
-	transition: opacity;
-	transition-duration: 0.5s;
-	width: 70%;
+   width: 70%;
+   background-color: rgba(255, 255, 255, .4);
+   border-radius: 1vw;
+   padding: 1vw;
+   margin-top: 10%;
+   position: relative;
+   opacity: 0;
+   text-align: center;
+
+   transition: opacity;
+   transition-duration: 0.5s;
+   transition-timing-function: cubic-bezier(0.23, 1, 0.320, 1);
 }
 .popup::before {
-	border-color: transparent transparent rgba(255, 255, 255, .4) transparent;
-	border-style: solid;
-	border-width: 10px;
-	bottom: 100%;
-	content: "";
-	left: 50%;
-	margin-left: -5px;
-	position: absolute;
+   content: "";
+   position: absolute;
+   bottom: 100%;
+   left: 50%;
+   margin-left: -5px;
+   border-width: 10px;
+   border-style: solid;
+   border-color: transparent transparent rgba(255, 255, 255, .4) transparent;
 }
-.popup>span {
-	font-family: "Orkney Light";
-	font-size: 1.5vw;
+
+.popup > span {
+   font-size: 1.5vw;
+   font-family: "Orkney Light";
 }
+
+
 .input-wrapper {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	margin-left: 3vw;
-	margin-right: 3vw;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   margin-left: 3vw;
+   margin-right: 3vw;
 }

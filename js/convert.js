@@ -45,6 +45,49 @@ function convertFile() {
   let baseHeight = parseFloat(document.getElementById('base-height-text-input').value)
   let smoothN = parseFloat(document.getElementById('smoothing-text-input').value)
 
+  //Ensuring that there are no empty inputs
+  let emptyFields = [false, false, false, false]
+  if(document.getElementById('scale-text-input').value.length == 0) {
+    document.getElementById('scale-error').innerHTML = 'Scale'
+    emptyFields[0] = true
+  }
+  if(document.getElementById('height-text-input').value.length == 0) {
+    //Adding commas
+    let text = ''
+    if(emptyFields[0])
+      text += ', '
+
+    text += 'Height'
+    document.getElementById('height-error').innerHTML = text
+    emptyFields[1] = true
+  }
+  if(document.getElementById('base-height-text-input').value.length == 0) {
+    //Adding commas
+    let text = ''
+    if(emptyFields[0] || emptyFields[1])
+      text += ', '
+      
+    text += 'Base Height'
+    document.getElementById('base-height-error').innerHTML = text
+    emptyFields[2] = true
+  }
+  if(document.getElementById('smoothing-text-input').value.length == 0) {
+    //Adding commas
+    let text = ''
+    if(emptyFields[0] || emptyFields[1] || emptyFields[2])
+      text += ', '
+      
+    text += 'Smoothing'
+    document.getElementById('smoothing-error').innerHTML = text
+    emptyFields[3] = true
+  }
+
+  if(emptyFields[0] || emptyFields[1] || emptyFields[2] || emptyFields[3]) {
+    document.getElementById("error-box").style='opacity: 100%'
+    return
+  }
+  
+
 	// Not converting if there is no file selected
 	if(filePath != null) {
     //Disabling text boxes
