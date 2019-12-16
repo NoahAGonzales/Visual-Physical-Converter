@@ -91,7 +91,7 @@ function updateProgressBar (newWidth) {
 }
 
 /**
- * Listens to the convertor worker for updates on the pgoress of conversion
+ * Listens to the convertor worker for updates on the progress of conversion
  */
 worker.onmessage = function (e) {
   updateProgressBar(e.data[0])
