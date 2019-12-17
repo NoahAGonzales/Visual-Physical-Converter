@@ -2,156 +2,146 @@
 @font-face {font-family: "Orkney Medium"; src: url('./fonts/orkney/Orkney\ Medium.ttf')}
 @font-face {font-family: "Orkney Bold"; src: url('./fonts/orkney/Orkney\ Bold.ttf')}
 
+* {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	outline: none;
+}
 body {
-   margin: 0;
-   padding: 0;
+	margin: 0;
+	padding: 0;
 }
-
 a {
-   text-decoration: none;
-   color: black;
+	color: black;
+	text-decoration: none;
 }
-
 #background {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   /*background-image: url(./images/silhouette-of-mountains-1323550.jpg);*/
-   background-image: url(./images/landscape-photo-of-mountain-with-polar-lights-1434608.jpg);
-
-   background-size: cover;
-   z-index: -1;
-   filter: grayscale(100%);
-
-   transition: filter;
-   transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-   transition-duration: 1s;
+	background-image: url(./images/landscape-photo-of-mountain-with-polar-lights-1434608.jpg);
+	background-size: cover;
+	filter: grayscale(100%);
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transition: filter;
+	transition-duration: 1s;
+	transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+	width: 100%;
+	z-index: -1;
 }
-
 #get-started-button {
-   left: 65vw;
-   top: 10vh;
-   position: relative;
-   width: 11vw;
-   background-color: rgba(0, 0, 0, 0);
-   opacity: 0;
-   animation-name: fade-in;
-   animation-duration: 1s;
-   animation-iteration-count: 1;
-   animation-fill-mode: forwards;
-   animation-timing-function:  cubic-bezier(0.445, 0.05, 0.55, 0.95);
-   outline: none;
-   color: black;
-
-   transition: transform;
-   transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-   transition-duration: 1s;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1;
+	animation-name: fade-in;
+	animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+	background-color: rgba(0, 0, 0, 0);
+	color: black;
+	left: 65vw;
+	opacity: 0;
+	outline: none;
+	position: relative;
+	top: 10vh;
+	transition: transform;
+	transition-duration: 1s;
+	transition-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	width: 11vw;
 }
-
-#get-started-button:hover{
-   transform: translateX(.4vw);
+#get-started-button:hover {
+	transform: translateX(.4vw);
 }
-
-#get-started-button:hover ~ #background {
-   filter: grayscale(0%);
+#get-started-button:hover~#background {
+	filter: grayscale(0%);
 }
-
 #main-text-wrapper {
-   padding: 0;
-   padding-top: 17vh;
-   margin-left: 15vw;
+	margin-left: 15vw;
+	padding: 0;
+	padding-top: 17vh;
 }
 #main-text {
-   margin: 0;
-   padding: 0;
-   font-family: "Orkney Bold";
-   font-size: 6vw;
+	font-family: "Orkney Bold";
+	font-size: 6vw;
+	margin: 0;
+	padding: 0;
 }
 #text-feel {
-   animation-delay: 0s;
+	animation-delay: 0s;
 }
 #text-experience {
-   animation-delay: 3s;
+	animation-delay: 3s;
 }
 #button-text {
-   font-size: 2vw;
-   font-family: "Orkney Medium";
+	font-family: "Orkney Medium";
+	font-size: 2vw;
 }
 .sliding-vertical {
-   display:inline;
+	display: inline;
 }
 .rotating-text {
-   animation-name: rotate;
-   animation-duration: 6s;
-   animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
-   animation-iteration-count: infinite;
-   opacity: 0;
-   overflow: hidden;
-   position: absolute;
-   transform: rotate3d(1, 0, 0, 90deg);
+	animation-duration: 6s;
+	animation-iteration-count: infinite;
+	animation-name: rotate;
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	transform: rotate3d(1, 0, 0, 90deg);
 }
 .rotating-text-last {
-   animation-name: rotate;
-   animation-duration: 6s;
-   animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
-   animation-iteration-count: infinite;
-   opacity: 0;
-   overflow: hidden;
-   position: absolute;
+	animation-duration: 6s;
+	animation-iteration-count: infinite;
+	animation-name: rotate;
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
 }
-
-
 @keyframes rotate {
-   0% {
-      opacity: 0;
-   }
-   25% {
-      opacity: 0;
-      transform: translateY(-4vw) rotate3d(1, 0, 0, 90deg);
-   }
-   50% {
-      opacity: 1;
-      transform: translateY(0px);
-   }
-   75% {
-      opacity: 1;
-      transform: translateY(0px);
-   }
-   100% {
-      opacity: 0;
-      transform: translateY(4vw) rotate3d(1, 0, 0, -90deg);
-   }
+	0% {
+		opacity: 0;
+	}
+	25% {
+		opacity: 0;
+		transform: translateY(-4vw) rotate3d(1, 0, 0, 90deg);
+	}
+	50% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+	75% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(4vw) rotate3d(1, 0, 0, -90deg);
+	}
 }
-
 @keyframes rotate-last {
-   0% {
-      opacity: 0;
-      transform: rotate3d(1, 0, 0, 90deg);
-   }
-   25% {
-      opacity: 0;
-      transform: translateY(-4vw) rotate3d(1, 0, 0, 90deg);
-   }
-   50% {
-      opacity: 1;
-      transform: translateY(0px);
-   }
-   75% {
-      opacity: 1;
-      transform: translateY(0px);
-   }
-   100% {
-      opacity: 1;
-   }
+	0% {
+		opacity: 0;
+		transform: rotate3d(1, 0, 0, 90deg);
+	}
+	25% {
+		opacity: 0;
+		transform: translateY(-4vw) rotate3d(1, 0, 0, 90deg);
+	}
+	50% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+	75% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+	100% {
+		opacity: 1;
+	}
 }
-
 @keyframes fade-in {
-   0% {
-      opacity: 0;
-   }
-   100% {
-      opacity: 1;
-   }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
