@@ -6,7 +6,6 @@ Built using ElectronJS. When finished, will be available on the windows store.
 ## To run
 1. Install [nodejs](https://nodejs.org/en/download/).
 2. Follow the [official instructions](https://electronjs.org/docs/tutorial/installation) to install electron.
-   
 3. Clone
    https://github.com/NoahAGonzales/vys-phys-convertor
 4. Run
