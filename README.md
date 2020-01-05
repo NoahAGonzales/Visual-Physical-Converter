@@ -7,7 +7,7 @@ Built using ElectronJS. When finished, will be available on the windows store.
 1. Install [nodejs](https://nodejs.org/en/download/).
 2. Follow the [official instructions](https://electronjs.org/docs/tutorial/installation) to install electron.
 3. Clone:  
-   `git clone: https://github.com/NoahAGonzales/vys-phys-convertor`
+   `git clone: https://github.com/NoahAGonzales/vis-phys-convertor`
 4. Run:  
    `npm start`
     
