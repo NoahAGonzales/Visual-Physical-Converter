@@ -1,5 +1,5 @@
 {
-  "name": "vys-phys-convertor",
+  "name": "vis-phys-convertor",
   "version": "1.0.0",
   "description": "takes a visual file and converts it to a 3d printable file",
   "main": "main.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NoahAGonzales/vys-phys-convertor.git"
+    "url": "git+https://github.com/NoahAGonzales/vis-phys-convertor.git"
   },
   "author": "Noah Gonzales",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NoahAGonzales/vys-phys-convertor/issues"
+    "url": "https://github.com/NoahAGonzales/vis-phys-convertor/issues"
   },
-  "homepage": "https://github.com/NoahAGonzales/vys-phys-convertor#readme",
+  "homepage": "https://github.com/NoahAGonzales/vis-phys-convertor#readme",
   "devDependencies": {
     "electron": "^7.1.2"
   },
