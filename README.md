@@ -1,7 +1,11 @@
 # vis-phys-convertor
 Takes a visual file and converts that to a 3d printable file
 
-Built using ElectronJS. When finished, will be available on the windows store.
+Built using ElectronJS. When ready, will be available on the windows store.
+
+## Functions
+* Can create an STL file from an image
+* More coming soon...
 
 ## To run
 1. Install [nodejs](https://nodejs.org/en/download/).
