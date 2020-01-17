@@ -14,41 +14,53 @@
             <div id="progress-bar" style="--width: 2%"></div>
          </div>
          <button onclick="convertFile()" tabindex="5">Convert</button>
-
       </div>
       
       <form>
-         <div class="input-wrapper">
-            <label for="scale-text-input" class="input-label">Scale</label>
-            <input id="scale-text-input" class="input-text-box" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
-            <div class="popup">
-               <span>The magnitude of the longer side of the image. Must be lower than or equal to the shorter dimension of the print.</span>
+         <div class="row">
+            <div class="input-wrapper">
+               <label for="scale-text-input" class="input-label">Scale</label>
+               <input id="scale-text-input" class="input-text-box" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
+               <div class="popup">
+                  <span>The magnitude of the longer side of the image. Must be lower than or equal to the shorter dimension of the print.</span>
+               </div>
             </div>
-         </div>
-   
-         <div class="input-wrapper">
-            <label for="height-text-input" class="input-label">Height</label> 
-            <input id ="height-text-input" class="input-text-box" type="text" name="height-text-input" value="5" onkeypress="return filterHeightInput(event)" tabindex="2">
-            <div class="popup">
-               <span>The height of the image that will span above the base. Recommended 5% of the scale.</span>
+      
+            <div class="input-wrapper">
+               <label for="height-text-input" class="input-label">Height</label> 
+               <input id ="height-text-input" class="input-text-box" type="text" name="height-text-input" value="5" onkeypress="return filterHeightInput(event)" tabindex="2">
+               <div class="popup">
+                  <span>The height of the image that will span above the base. Recommended 5% of the scale.</span>
+               </div>
             </div>
-         </div>
+      
+            <div class="input-wrapper">
+               <label for="base-height-text-input" class="input-label">Base Height</label> 
+               <input id="base-height-text-input" class="input-text-box" type="text" name="base-height-text-input" value="1" onkeypress="return filterBaseHeightInput(event)" tabindex="3"> 
+               <div class="popup">
+                  <span>The height of the required base. Recommended 1% of the scale.</span>
+               </div>
+            </div>
 
-         <br>
-   
-         <div class="input-wrapper">
-            <label for="base-height-text-input" class="input-label">Base Height</label> 
-            <input id="base-height-text-input" class="input-text-box" type="text" name="base-height-text-input" value="1" onkeypress="return filterBaseHeightInput(event)" tabindex="3"> 
-            <div class="popup">
-               <span>The height of the required base. Recommended 1% of the scale.</span>
+            <div class="input-wrapper">
+               <label for="smoothing-text-input" class="input-label">Smoothing</label> 
+               <input id="smoothing-text-input" class="input-text-box"type="text" name="smoothing-text-input" value="1" onkeypress="return filterSmoothingInput(event)" tabindex="4">
+               <div class="popup">
+                  <span>Removes jagged edges and sharp drops, but higher values will decrease clarity. 1 is recommended for most images.</span>
+               </div>
             </div>
          </div>
-
-         <div class="input-wrapper">
-            <label for="smoothing-text-input" class="input-label">Smoothing</label> 
-            <input id="smoothing-text-input" class="input-text-box"type="text" name="smoothing-text-input" value="1" onkeypress="return filterSmoothingInput(event)" tabindex="4">
-            <div class="popup">
-               <span>Removes jagged edges and sharp drops, but higher values will decrease clarity. 1 is recommended for most images.</span>
+         <div class="row">
+            <div class="input-wrapper">
+               <label for="invert-radio-input" class="input-label">Base Determination</label>
+               <div class="row">
+                  <input id="invert-radio-input-black" type="radio" name="invert-radio-input" value="black">
+                  <span class="base-text-option">Black Base</span>
+               </div>
+               <div class="row">
+                  <input id="invert-radio-input-white" type="radio" name="invert-radio-input" value="white">
+                  <span class="base-text-option">White Base</span>
+               </div>
             </div>
          </div>
       </form>

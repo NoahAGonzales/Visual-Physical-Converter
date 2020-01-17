@@ -1,7 +1,12 @@
 const { ipcRenderer } = require("electron")
 
 /********************************************************************************************************************************
-   Workers
+  Initialization
+*/
+document.getElementById("invert-radio-input-black").checked = true
+
+/********************************************************************************************************************************
+  Workers
 */
 process.dlopen = () => {
 	throw new Error('Load native module is not safe')
@@ -101,12 +106,21 @@ function convertFile() {
 		let src = cv.imread('img-for-analysis', cv.IMREAD_GRAYSCALE)
 		// Variable to hold the pixel values of the image
 		let pixelValues = [...Array(src.rows)].map(e => Array(src.cols).fill(null))
-		//Storing the values of the pixels in the array
-		for(let i = 0; i < src.rows; i++) {
-			for (let j = 0; j < src.cols; j++) {
-				pixelValues[i][j] = src.ucharAt(i, j * src.channels())
-			}
-		}
+    //Storing the values of the pixels in the array
+    if(document.getElementById("invert-radio-input-black").checked == true) {
+      for(let i = 0; i < src.rows; i++) {
+        for (let j = 0; j < src.cols; j++) {
+          pixelValues[i][j] = src.ucharAt(i, j * src.channels())
+        }
+      }
+    }
+    else {
+      for(let i = 0; i < src.rows; i++) {
+        for (let j = 0; j < src.cols; j++) {
+          pixelValues[i][j] = 255-src.ucharAt(i, j * src.channels())
+        }
+      }
+    }
 		worker.postMessage([filePath, fileName, pixelValues, scale, height, baseHeight, smoothN])
 	}
 }
