@@ -1,5 +1,5 @@
 {
-  "name": "vpc",
+  "name": "Visual-Physical-Converter",
   "version": "1.0.0",
   "description": "takes a visual file and converts it to a 3d printable file",
   "main": "main.js",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/NoahAGonzales/vis-phys-convertor.git"
   },
-  "author": "Erif Digital",
+
   "contributors": ["Noah Gonzales"],
   "license": "ISC",
   "bugs": {
@@ -26,6 +26,12 @@
     "fs": "0.0.1-security"
   },
   "build": {
+    "appx" : { 
+      "identityName" : "61923AuroraDigital.Visual-Physical-Converter",
+      "publisher" : "CN=C1A6ABD1-A988-4EA1-95C0-4423EBE7F9C3",
+      "publisherDisplayName" : "Erif Digital",
+      "applicationId":"VisualPhysicalConverter"
+    },
     "win": {
       "target":"appx"
     }
