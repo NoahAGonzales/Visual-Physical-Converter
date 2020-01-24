@@ -1,3 +1,7 @@
+
+/******************************************************************************************************
+   Filters
+*/
 function filterScaleInput(e) {
    if(e.type == 'keypress') {
 
@@ -44,3 +48,69 @@ function filterSmoothingInput(e) {
    }
    return false
 }
+
+/***********************************************************************************************
+   Error checking
+ */
+
+document.getElementById('scale-text-input').addEventListener('keyup', function() {
+   let error = ""
+   if(document.getElementById('scale-text-input').value.length == 0) {
+      error += "Scale cannot be empty!"
+   }
+   if ( document.getElementById('scale-text-input').value == ".") {
+      error += "Scale should be a value!"
+   }
+   if ( document.getElementById('scale-text-input').value == "0") {
+      error += "Scale cannot be 0!"
+   }
+
+   document.getElementById('scale-error').innerHTML = error
+})
+
+document.getElementById('height-text-input').addEventListener('keyup', function() {
+   let error = ""
+   if(document.getElementById('height-text-input').value.length == 0) {
+      error += "Height cannot be empty!"
+   }
+   if ( document.getElementById('height-text-input').value == ".") {
+      error += "Height should be a value!"
+   }
+   if ( document.getElementById('height-text-input').value == "0") {
+      error += "Height cannot be 0!"
+   }
+
+   document.getElementById('height-error').innerHTML = error
+})
+
+document.getElementById('base-height-text-input').addEventListener('keyup', function() {
+   let error = ""
+   if(document.getElementById('base-height-text-input').value.length == 0) {
+      error += "Base height cannot be empty!"
+   }
+   if ( document.getElementById('base-height-text-input').value == ".") {
+      error += "Base height should be a value!"
+   }
+   if ( document.getElementById('base-height-text-input').value == "0") {
+      error += "Base height cannot be 0!"
+   }
+
+   document.getElementById('base-height-error').innerHTML = error
+})
+
+document.getElementById('smoothing-text-input').addEventListener('keyup', function() {
+   let error = ""
+   if(document.getElementById('smoothing-text-input').value.length == 0) {
+      error += "Smoothing cannot be empty!"
+   }
+   if ( document.getElementById('smoothing-text-input').value == ".") {
+      error += "Smoothing should be a value!"
+   }
+   /*
+   if ( document.getElementById('smoothing-text-input').value == "0") {
+      error += "Smoothing cannot be 0!"
+   }*/
+
+   document.getElementById('smoothing-error').innerHTML = error
+})
+
