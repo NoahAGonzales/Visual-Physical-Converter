@@ -54,14 +54,15 @@ function filterSmoothingInput(e) {
  */
 
 document.getElementById('scale-text-input').addEventListener('keyup', function() {
+   let text = document.getElementById('scale-text-input').value
    let error = ""
-   if(document.getElementById('scale-text-input').value.length == 0) {
+   if(text.length == 0) {
       error += "Scale cannot be empty!"
    }
-   if ( document.getElementById('scale-text-input').value == ".") {
+   if (text == "." || parseFloat(text) == NaN) {
       error += "Scale should be a value!"
    }
-   if ( document.getElementById('scale-text-input').value == "0") {
+   if (parseFloat(text) == 0) {
       error += "Scale cannot be 0!"
    }
 
@@ -69,14 +70,15 @@ document.getElementById('scale-text-input').addEventListener('keyup', function()
 })
 
 document.getElementById('height-text-input').addEventListener('keyup', function() {
+   let text = document.getElementById('height-text-input').value
    let error = ""
-   if(document.getElementById('height-text-input').value.length == 0) {
+   if(text.length == 0) {
       error += "Height cannot be empty!"
    }
-   if ( document.getElementById('height-text-input').value == ".") {
+   if ( text == "." || parseFloat(text) == NaN) {
       error += "Height should be a value!"
    }
-   if ( document.getElementById('height-text-input').value == "0") {
+   if (parseFloat(text) == "0") {
       error += "Height cannot be 0!"
    }
 
@@ -84,14 +86,15 @@ document.getElementById('height-text-input').addEventListener('keyup', function(
 })
 
 document.getElementById('base-height-text-input').addEventListener('keyup', function() {
+   let text = document.getElementById('base-height-text-input').value
    let error = ""
-   if(document.getElementById('base-height-text-input').value.length == 0) {
+   if(text.length == 0) {
       error += "Base height cannot be empty!"
    }
-   if ( document.getElementById('base-height-text-input').value == ".") {
+   if (text == "." || parseFloat(text) == NaN) {
       error += "Base height should be a value!"
    }
-   if ( document.getElementById('base-height-text-input').value == "0") {
+   if (parseFloat(text) == "0") {
       error += "Base height cannot be 0!"
    }
 
@@ -99,11 +102,12 @@ document.getElementById('base-height-text-input').addEventListener('keyup', func
 })
 
 document.getElementById('smoothing-text-input').addEventListener('keyup', function() {
+   let text = document.getElementById('smoothing-text-input').value 
    let error = ""
-   if(document.getElementById('smoothing-text-input').value.length == 0) {
+   if(text.length == 0) {
       error += "Smoothing cannot be empty!"
    }
-   if ( document.getElementById('smoothing-text-input').value == ".") {
+   if (text == "." || parseFloat(text) == NaN) {
       error += "Smoothing should be a value!"
    }
    /*
