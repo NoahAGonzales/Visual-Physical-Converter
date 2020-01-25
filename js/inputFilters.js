@@ -110,10 +110,6 @@ document.getElementById('smoothing-text-input').addEventListener('keyup', functi
    if (text == "." || parseFloat(text) == NaN) {
       error += "Smoothing should be a value!"
    }
-   /*
-   if ( document.getElementById('smoothing-text-input').value == "0") {
-      error += "Smoothing cannot be 0!"
-   }*/
 
    document.getElementById('smoothing-error').innerHTML = error
 })

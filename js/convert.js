@@ -11,7 +11,7 @@ document.getElementById("invert-radio-input-black").checked = true
 process.dlopen = () => {
 	throw new Error('Load native module is not safe')
 }
-let worker = new Worker('../workers/convertor.js')
+let worker = new Worker('../workers/converter.js')
 
 /********************************************************************************************************************************
  * Selecting the file
