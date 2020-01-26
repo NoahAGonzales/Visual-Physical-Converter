@@ -374,7 +374,7 @@ function smooth(n) {
       currentProgress += 2
       postMessage([(currentProgress)/maxProgress])
 
-    //Creating the base. Every pixel along the edge except the first and last will be used to create 2 facets. Facet 1 consits of the point, the point changed to a value of zero, and the last point. Facet 2 consists of the point, the next point changed to a value of zero, and the point changed to a value of 0;
+   //Creating the base. Every pixel along the edge except the first and last will be used to create 2 facets. Facet 1 consits of the point, the point changed to a value of zero, and the last point. Facet 2 consists of the point, the next point changed to a value of zero, and the point changed to a value of 0;
    for (let row = 1; row < (pixelValues.length-1); row++)
    {
       //Left edge 

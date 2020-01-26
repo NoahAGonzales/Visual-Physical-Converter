@@ -13,16 +13,168 @@
     src: url('../fonts/orkney/Orkney\ Bold.ttf')
 }
 
+:root {
+    --white: #C8C8C8;
+    --red: #EB5E28;
+    --dark-gray: #29282a;
+    --gray: #3d3c3e;
+    --medium-gray: #3a383b;
+    --light-gray: #4c4b4e;
+    --black: #000000;
+}
+
 * {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     outline: none;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--black);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background-color: var(--gray);
+    outline-color: var(--light-gray);
+    outline-style: solid;
+    outline-width: 3px;
+    -webkit-appearance: none;
+    border-width: 0;
+    border-style: none;
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
+
+button:active {
+    outline-color: var(--gray)
+}
+
+#options {
+    width: 78%;
+    height: 99%;
+    overflow-y: auto;
+    background-color: var(--dark-gray);
+    display: flex;
+    flex-direction: column;
+    padding-left: 11%;
+    padding-right: 11%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+#options::-webkit-scrollbar {
+    width: 2%;
+}
+#options::-webkit-scrollbar-track {
+    background: var(--black);
+}
+#options::-webkit-scrollbar-thumb {
+    background: var(--medium-gray)
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vh;
+}
+
+.input-label {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--white);
+}
+
+.input-text-box {
+    padding-top: 0.15em;
+    padding-bottom: 0.15em;
+    padding-left: 0.6em;
+    margin-top: 0.5vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--gray);
+    border: 1px solid #00000000;
+    color: var(--white);
+    border-radius: 0.2em;
+}
+
+#preview-container {
+    width: 80%;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+#img-for-analysis {
+    margin-top: 100vh;
+    opacity: 0;
+    position: fixed;
+}
+
+.error {
+    color: var(--red);
+}
+
+#filename {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--white);
+    background-color: var(var(--gray));
+    padding: 0.6em;
+    font-size: 15px;
+    border-radius: 0.2em;
+}
+
+.base-text-option {
+    color: var(--white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+#select-file-button {
+
+}
+
+#convert-button {
+    margin-top: 8vh;
+}
+
+#progress-bar {
+    width: var(--width);
+    height: 1%;
+    background-color: var(--white);
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+#left-bar {
+    width: 20%;
+    height: 100%;
+}
+
+
+/*
+
 body {
     margin: 0;
     padding-top: 10vh;
     height: 100%;
-    /*overflow: hidden;*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,7 +232,6 @@ form {
     left: 0;
     width: 100%;
     height: 100%;
-    /*background-image: url(./images/silhouette-of-mountains-1323550.jpg);*/
     background-image: url(../images/landscape-photo-of-mountain-with-polar-lights-1434608.jpg);
     background-size: cover;
     z-index: -1;
@@ -224,3 +375,5 @@ form {
     font-size: 17px;
     font-family: "Orkney Light";
 }
+
+*/

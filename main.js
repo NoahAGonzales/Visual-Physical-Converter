@@ -1,4 +1,5 @@
 const { app, BrowserWindow, dialog, ipcMain } = require('electron')
+const path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -13,7 +14,8 @@ function createWindow () {
       nodeIntegration: true,
       nodeIntegrationWorker: true,
       nodeIntegrationInWorker: true,
-    }
+    },
+    icon: path.join(__dirname, './icons/vpc-icon - 64x64.png')
   })  
 
   // and load the index.html of the app.
@@ -23,15 +25,18 @@ function createWindow () {
   win.webContents.openDevTools()
 
   //Resizing
+  /*
   var tmpSize = [0,0];
-
     win.on('resize', (e)=>{
         var size = win.getSize()
         if( Math.abs(size[0]-tmpSize[0]) > 2 || Math.abs(size[1]-tmpSize[1]) > 2){
           win.setSize(size[0], parseInt(size[0] * 9.4 / 16))
         }
       tmpSize = size;
-  });
+  });*/
+
+  //Min size
+  win.setMinimumSize(720,720)
 
   // Menubar
   win.removeMenu()
