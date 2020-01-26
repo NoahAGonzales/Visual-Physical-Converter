@@ -19,10 +19,13 @@ camera.position.set(500,500,500)
 camera.lookAt(0,0,0)
 
 // Renderer
-var renderer = new THREE.WebGLRenderer()
+var renderer = new THREE.WebGLRenderer({ antialias: true })
 let container = document.getElementById('preview-container')
 renderer.setSize($(container).width(), $(container).height() )
 container.appendChild( renderer.domElement )
+
+//Color
+scene.background = new THREE.Color( 0xAAAAAA );
 
 //Shadows
 renderer.shadowMap.enabled = true
@@ -68,20 +71,6 @@ cube.position.set(0, 20, 0);
 cube.castShadow = true
 scene.add(cube);
 
-// add plane to the scene
-// add plane to the scene
-var plane = new THREE.Mesh(
-   new THREE.PlaneBufferGeometry(1500, 1500, 8, 8),
-   new THREE.MeshLambertMaterial({
-       color: 0x00afaf,
-       emissive: 0x2a2a2a,
-       emissiveIntensity: .5,
-       side: THREE.DoubleSide
-}));
-plane.rotation.x = Math.PI / 2;
-plane.receiveShadow = true
-scene.add(plane);
-
 // spotlight, and spotLight helper
 /*
 var spotLight = new THREE.SpotLight(),
@@ -114,7 +103,7 @@ scene.add(ambientLight)
 //spotLight.position.set(100, 200, -100);
 //spotLightHelper.update();
 
-var grid = new THREE.GridHelper(100, 10);
+var grid = new THREE.GridHelper(10000, 1000);
 scene.add(grid);
 
 // Shapes
@@ -193,18 +182,22 @@ function updatePreview() {
       }
    }
 
+   console.log('here0')
+
    for (let row = 1; row < pValues.length; row+=2)
    {
       for (let col = 1; col < pValues[0].length; col+=2)
       {
+
+         console.log('in loop')
          verts.push( 
             //Top left
-            row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,   
-            (row-1)*xScale, (pValues[(row-1)][col] * height + baseHeight), col*yScale,  
+            (row-1)*xScale, (pValues[(row-1)][col] * height + baseHeight), col*yScale, 
+            row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,    
             (row-1)*xScale, (pValues[row-1][col-1] * height + baseHeight), (col-1)*yScale, 
 
-            row*xScale, (pValues[row][col] * height + baseHeight), col*yScale, 
-            (row-1)*xScale, (pValues[(row-1)][col - 1] * height + baseHeight), (col-1)*yScale,  
+            (row-1)*xScale, (pValues[(row-1)][col - 1] * height + baseHeight), (col-1)*yScale, 
+            row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,  
             row*xScale, (pValues[row][col-1] * height + baseHeight), (col-1)*yScale, 
          )
 
@@ -215,12 +208,12 @@ function updatePreview() {
          // Top Right
          if (col+1 < pValues[0].length) {
             verts.push(
-               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,  
-               (row-1)*xScale, (pValues[(row-1)][col + 1] * height + baseHeight), (col+1)*yScale,  
+               (row-1)*xScale, (pValues[(row-1)][col + 1] * height + baseHeight), (col+1)*yScale,
+               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,    
                (row-1)*xScale, (pValues[(row-1)][col] * height + baseHeight), col*yScale,
 
-               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale, 
                row*xScale, (pValues[row][col + 1] * height + baseHeight), (col+1)*yScale, 
+               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale, 
                (row-1)*xScale, (pValues[(row-1)][col + 1] * height + baseHeight), (col+1)*yScale, 
             )
 
@@ -232,12 +225,12 @@ function updatePreview() {
          // Bottom left
          if (row + 1 < pValues.length) {
             verts.push(
-               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale, 
-               (row+1)*xScale, (pValues[row + 1][col - 1] * height + baseHeight), (col-1)*yScale,  
+               (row+1)*xScale, (pValues[row + 1][col - 1] * height + baseHeight), (col-1)*yScale, 
+               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,  
                (row+1)*xScale, (pValues[row + 1][col] * height + baseHeight), col*yScale, 
 
-               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale, 
                row*xScale, (pValues[row][col - 1] * height + baseHeight), (col-1)*yScale, 
+               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale, 
                (row+1)*xScale, (pValues[row + 1][col - 1] * height + baseHeight), (col-1)*yScale,  
             )
 
@@ -249,12 +242,12 @@ function updatePreview() {
          // Bottom right
          if (row + 1 < pValues.length &&(col+1)< pValues[0].length) {
             verts.push(
-               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,  
                (row+1)*xScale, (pValues[row + 1][col] * height + baseHeight), col*yScale, 
+               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,  
                (row+1)*xScale, (pValues[row + 1][col + 1] * height + baseHeight), (col+1)*yScale, 
 
-               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,  
                (row+1)*xScale, (pValues[row + 1][col + 1] * height + baseHeight), (col+1)*yScale, 
+               row*xScale, (pValues[row][col] * height + baseHeight), col*yScale,  
                row*xScale, (pValues[row][col + 1] * height + baseHeight), (col+1)*yScale,  
             )
 
@@ -273,68 +266,68 @@ function updatePreview() {
 
          //Sides  
          // Left edge going across rows
-         0, (pValues[0][0] * height + baseHeight), 0,  
          0, 0, 0, 
+         0, (pValues[0][0] * height + baseHeight), 0,  
          1*xScale, 0, 0,
          //Top edge going across columns
-         0, (pValues[0][0] * height + baseHeight), 0,  
          0,  0, 1*yScale, 
+         0, (pValues[0][0] * height + baseHeight), 0,  
          0, 0, 0,
          //Bottom
          //Left edge going across rows
-         0, 0, 0,
          centerX, 0, centerY, 
+         0, 0, 0,
          1*xScale, 0, 0, 
          //Top edge going across columns
-         0, 0, 0, 
-         0,  0, 1*yScale, 
+         0,  0, 1*yScale,
+         0, 0, 0,  
          centerX, 0, centerY, 
 
          //Bottom left corner
 
          // Sides
          //Left edge going across rows 
-         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][0] * height + baseHeight), 0,  
-         (pValues.length - 2)*xScale, (pValues[(pValues.length-1)][0] * height + baseHeight), 0,  
+         (pValues.length - 2)*xScale, (pValues[(pValues.length-1)][0] * height + baseHeight), 0, 
+         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][0] * height + baseHeight), 0,   
          (pValues.length-1)*xScale, 0, 0, 
          //Bottom edge going across columns
-         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][0] * height + baseHeight), 0,  
          (pValues.length-1)*xScale, 0, 0, 
+         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][0] * height + baseHeight), 0,  
          (pValues.length-1)*xScale, 0, 1*yScale,  
          //Bottom
          //Bottom edge going across columns
-         (pValues.length-1)*xScale, 0, 0,
          centerX, 0, centerY, 
+         (pValues.length-1)*xScale, 0, 0,
          (pValues.length-1)*xScale,  0, 1*yScale,
           
 
          // Top-right corner
          //Sides
          //Top edge going across columns
-         0, (pValues[0][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,  
          0, 0, (pValues[0].length-1)*yScale, 
+         0, (pValues[0][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,  
          0, (pValues[0][pValues[0].length-2] * height + baseHeight), (pValues[0].length-2)*yScale,  
          //Right edge going across rows
-         0, (pValues[0][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,  
          1*xScale, 0, (pValues[0].length-1)*yScale, 
+         0, (pValues[0][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,  
          0, 0, (pValues[0].length-1)*yScale,  
          //Bottom
          //Right edge going across rows
-         0, 0, (pValues[0].length-1)*yScale, 
-         1*xScale, 0, (pValues[0].length-1)*yScale,  
+         1*xScale, 0, (pValues[0].length-1)*yScale, 
+         0, 0, (pValues[0].length-1)*yScale,  
          centerX, 0, centerY, 
 
          // Bottom right corner
 
          //Sides
          //Right edge going across rows
-         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale, 
          (pValues.length-1)*xScale, 0, (pValues[0].length-1)*yScale, 
+         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale, 
          (pValues.length-2)*xScale, (pValues[pValues.length-2][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale, 
          //Bottom
          //Bottom edge going across columns
-         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,  
          (pValues.length-1)*xScale, (pValues[(pValues.length-1)][pValues[0].length - 2] * height + baseHeight), (pValues[0].length-2)*yScale,  
+         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,  
          (pValues.length-1)*xScale, 0, (pValues[0].length-1)*yScale, 
       )
 
@@ -353,31 +346,31 @@ function updatePreview() {
          verts.push(
             //Left edge 
 
-            //Sides            
+            //Sides  
+            (row-1)*xScale, (pValues[(row-1)][0] * height + baseHeight), 0,             
             row*xScale, (pValues[row][0] * height + baseHeight), 0,  
-            (row-1)*xScale, (pValues[(row-1)][0] * height + baseHeight), 0,   
             row*xScale, 0,  0, 
-            row*xScale, (pValues[row][0] * height + baseHeight), 0,  
             row*xScale,  0,  0,
+            row*xScale, (pValues[row][0] * height + baseHeight), 0,  
             (row+1)*xScale,  0,  0,            
-            //Bottom            
-            row*xScale,  0,  0, 
-            centerX, 0, centerY,   
+            //Bottom   
+            centerX, 0, centerY,          
+            row*xScale,  0,  0,   
             (row+1)*xScale,  0,  0, 
             
             //Right edge
 
-            //Sides            
+            //Sides   
+            row*xScale, 0, (pValues[0].length-1)*yScale,           
             row*xScale, (pValues[row][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale, 
-            row*xScale, 0, (pValues[0].length-1)*yScale,  
             (row-1)*xScale,  (pValues[row-1][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,                         
-            row*xScale,  (pValues[row][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,  
-            (row+1)*xScale, 0, (pValues[0].length-1)*yScale,  
+            (row+1)*xScale, 0, (pValues[0].length-1)*yScale, 
+            row*xScale,  (pValues[row][(pValues[0].length-1)] * height + baseHeight), (pValues[0].length-1)*yScale,   
             row*xScale, 0, (pValues[0].length-1)*yScale,  
             
-            //Bottom            
-            row*xScale, 0, (pValues[0].length-1)*yScale,  
-            (row+1)*xScale, 0, (pValues[0].length-1)*yScale,  
+            //Bottom   
+            (row+1)*xScale, 0, (pValues[0].length-1)*yScale,          
+            row*xScale, 0, (pValues[0].length-1)*yScale,   
             centerX, 0, centerY,  
          )  
 
@@ -394,31 +387,31 @@ function updatePreview() {
       verts.push(
          //Top 
          
-         //Sides         
+         //Sides   
+         0, 0, col*yScale,        
          0, (pValues[0][col] * height + baseHeight), col*yScale,  
-         0, 0, col*yScale,  
-         0, (pValues[0][col-1] * height + baseHeight), (col-1)*yScale,                   
-         0, (pValues[0][col] * height + baseHeight), col*yScale,  
-         0, 0, (col+1)*yScale,   
+         0, (pValues[0][col-1] * height + baseHeight), (col-1)*yScale, 
+         0, 0, (col+1)*yScale,                    
+         0, (pValues[0][col] * height + baseHeight), col*yScale,   
          0, 0, col*yScale,            
-         // Bottom         
-         0, 0, col*yScale,  
-         0, 0, (col+1)*yScale, 
+         // Bottom   
+         0, 0, (col+1)*yScale,      
+         0, 0, col*yScale,   
          centerX, 0, centerY,  
          
          
          //Bottom edge
 
-         //Sides         
+         //Sides    
+         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][col - 1] * height + baseHeight), (col-1)*yScale,       
          (pValues.length-1)*xScale, (pValues[(pValues.length-1)][col] * height + baseHeight), col*yScale,   
-         (pValues.length-1)*xScale, (pValues[(pValues.length-1)][col - 1] * height + baseHeight), (col-1)*yScale,  
-         (pValues.length-1)*xScale, 0, col*yScale,                     
+         (pValues.length-1)*xScale, 0, col*yScale, 
+         (pValues.length-1)*xScale, 0, col*yScale,                      
          (pValues.length-1)*xScale, (pValues[(pValues.length-1)][col] * height + baseHeight), col*yScale,  
-         (pValues.length-1)*xScale, 0, col*yScale,  
          (pValues.length-1)*xScale, 0, (col+1)*yScale,                    
-         //Bottom                  
+         //Bottom    
+         centerX, 0, centerY,               
          (pValues.length-1)*xScale, 0, col*yScale,  
-         centerX, 0, centerY, 
          (pValues.length-1)*xScale, 0, (col+1)*yScale,   
       )
 
