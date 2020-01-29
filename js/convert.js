@@ -37,6 +37,8 @@ ipcRenderer.on("file path", function(event, data) {
     document.getElementById('img-for-analysis').src = filePath
     //Resetting the progress bar
     updateProgressBar(0)
+    // Updating the preview
+    setTimeout(() => {updatePreview()}, 1000)
   }
 })
 
@@ -45,8 +47,6 @@ ipcRenderer.on("file path", function(event, data) {
  */
 
 function generatePixelValues() {
-  console.log('generating pixel values')
-
   // Ensuring that an image has been selected
   if (filePath == null) {
     return

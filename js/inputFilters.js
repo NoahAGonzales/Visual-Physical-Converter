@@ -113,4 +113,3 @@ document.getElementById('smoothing-text-input').addEventListener('keyup', functi
 
    document.getElementById('smoothing-error').innerHTML = error
 })
-
