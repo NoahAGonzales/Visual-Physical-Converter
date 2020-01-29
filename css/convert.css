@@ -75,7 +75,7 @@ button:active {
 }
 
 #options::-webkit-scrollbar {
-    width: 2%;
+    width: 3%;
 }
 #options::-webkit-scrollbar-track {
     background: var(--black);
