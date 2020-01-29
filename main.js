@@ -1,5 +1,6 @@
 const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const path = require('path')
+const open  = require('open')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -22,7 +23,12 @@ function createWindow () {
   win.loadFile('index.html')
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
+
+  win.webContents.on('new-window', function(event, url){
+    event.preventDefault();
+    open(url);
+  });
 
   //Resizing
   /*
