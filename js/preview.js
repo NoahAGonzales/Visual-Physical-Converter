@@ -112,6 +112,12 @@ function updatePreview() {
    }
    
    let pValues = pixelValues
+
+   // Limit size of preview
+   if (pixelValues.length * pixelValues[0].length > 40000) {
+      return
+   }
+   /*
    let downsizeN = 1
    let r = 0
    let c = 0
@@ -120,10 +126,10 @@ function updatePreview() {
    while (Math.max(pixelValues.length/downsizeN, pixelValues[0].length/downsizeN) > 100) {
       downsizeN++
    }
-   for (let i = 0; i < pixelValues.length; i+=(1+downsizeN)) {
+   for (let i = 0; i < pixelValues.length; i+=(downsizeN)) {
       r++
    }
-   for(let j = 0; j < pixelValues.length; j+=(1+downsizeN)) {
+   for(let j = 0; j < pixelValues.length; j+=(downsizeN)) {
       c++
    }
 
@@ -133,6 +139,8 @@ function updatePreview() {
          pValues[i][j] = pixelValues[i][j]
       }
    }
+
+   */
 
    let scale = parseFloat(document.getElementById('scale-text-input').value)
    let height = (parseFloat(document.getElementById('height-text-input').value))/255
