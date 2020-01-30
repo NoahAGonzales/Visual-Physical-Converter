@@ -1,4 +1,4 @@
 test/
 *.stl
 *.appx
-./dist
+./dist/
