@@ -154,7 +154,7 @@ button:active {
 }
 
 #progress-bar {
-    width: var(--width);
+    width: calc(var(--width) * 1%);
     height: 1%;
     background-color: var(--white);
 }
