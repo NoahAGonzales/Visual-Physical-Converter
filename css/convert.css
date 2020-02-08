@@ -17,6 +17,7 @@
     --white: #C8C8C8;
     --red: #EB5E28;
     --dark-gray: #29282a;
+    --shady-gray: #302f31;
     --gray: #3d3c3e;
     --medium-gray: #3a383b;
     --light-gray: #4c4b4e;
@@ -42,7 +43,20 @@ body {
     flex-direction: column;
 }
 
+p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 button {
+    outline-color: var(--light-gray);
+    outline-style: solid;
+    outline-width: 3px;
+    -webkit-appearance: none;
+    border-width: 0;
+    border-style: none;
+}
+
+.option-button {
     background-color: var(--gray);
     outline-color: var(--light-gray);
     outline-style: solid;
@@ -57,13 +71,56 @@ button {
     padding-bottom: 0.3em;
 }
 
-button:active {
+.option-button:active {
     outline-color: var(--gray)
+}
+
+#tabs {
+    width: 100%;
+    height: 5%;
+    background-color: var(--light-gray);
+    display: flex;
+    flex-direction: row;
+}
+
+.tab-link {
+    height: 100%;
+    width: 50%;
+    background-color: var(--gray);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+}
+
+.tab-link:hover {
+    background-color: var(--dark-gray)
+}
+
+.tab-link.active {
+    background-color: var(--dark-gray);
+}
+
+#settings {
+    width: 78%;
+    height: 94%;
+    overflow-y: auto;
+    background-color: var(--dark-gray);
+    display: flex;
+    flex-direction: column;
+    padding-left: 11%;
+    padding-right: 11%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    display: none;
 }
 
 #options {
     width: 78%;
-    height: 99%;
+    height: 94%;
     overflow-y: auto;
     background-color: var(--dark-gray);
     display: flex;

@@ -7,8 +7,16 @@
    <body>
       <div class="row">
          <div class="column" id="left-bar">
-            <div id="options">
-               <button id="select-file-button" onclick="selectFile()" tabindex="0">Select File</button>
+            <div id="tabs">
+               <button class="tab-link active" onclick="openTab(event, 'options')">
+                  <p>Convert</p>
+               </button>
+               <button class="tab-link" onclick="openTab(event, 'settings')">
+                  <p>Settings</p>
+               </button>
+            </div>
+            <div class="tab-content" id="options">
+               <button class="option-button" id="select-file-button" onclick="selectFile()" tabindex="0">Select File</button>
 
                <p id="filename">You have not selected a file yet!</p>
 
@@ -48,8 +56,9 @@
                   </div>
                </div>
 
-               <button id="convert-button" onclick="convertFile(); updatePreview()" tabindex="7">Convert</button>
-
+               <button class="option-button" id="convert-button" onclick="convertFile(); updatePreview()" tabindex="7">Convert</button>
+            </div>
+            <div class="tab-content" id="settings">
                <a id="privacy-url" href="https://app.termly.io/document/privacy-policy/f1c44589-9492-42dd-967c-4db260e7dc5e" target="_blank">Privacy policy</a>
             </div>
             <div id="progress-bar" style="--width: 0%"></div>
