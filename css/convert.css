@@ -193,6 +193,17 @@ button {
     padding: 0.6em;
     font-size: 15px;
     border-radius: 0.2em;
+    word-wrap: break-word;
+}
+
+#destination {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--white);
+    background-color: var(var(--gray));
+    padding: 0.6em;
+    font-size: 15px;
+    border-radius: 0.2em;
+    word-wrap: break-word;
 }
 
 .base-text-option {
