@@ -96,5 +96,19 @@ ipcMain.on('selectFile', function(event, data) {
   selectFile(event)
 })
 
+let selectDestination = async(event) => {
+  //Opening the dialog window for selecting a folder - with the filters of an image
+  let folderPath = await dialog.showOpenDialog({ properties: ['openDirectory']})
+
+  // Sending the file path picked back to the render process
+  event.sender.send("folder path", folderPath)
+}
+
+ipcMain.on('selectDestination', function(event, data) {
+  selectDestination(event)
+})
+
+
+
 
 

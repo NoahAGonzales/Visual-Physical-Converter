@@ -16,10 +16,11 @@ let userSmoothN = 0
  *    4) The height
  *    5) The base height
  *    6) Smoothing passes
+ *    7) Destination
  */
 onmessage = function (e) {
    //Creating the write stream
-   let stream = fs.createWriteStream(e.data[1].split('.')[0] + '.stl', {flags: 'w'})
+   let stream = fs.createWriteStream(e.data[7] + '\\' + e.data[1].split('.')[0] + '.stl', {flags: 'w'})
 
    //Setup
    pixelValues = e.data[2]

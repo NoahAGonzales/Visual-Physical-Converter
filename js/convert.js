@@ -19,10 +19,16 @@ let worker = new Worker('../workers/converter.js')
 
 let filePath = null
 let fileName = null
+let destination = null
 
 function selectFile() {
-   // Send a message to the main process open the dialog window for selecting a file
+   // Send a message to the main process to open the dialog window for selecting a file
    ipcRenderer.send('selectFile', {})
+}
+
+function selectDestination() {
+  // Send a message to the main process to open the dialog window for seleting a folder for destination
+  ipcRenderer.send('selectDestination', {})
 }
 
 ipcRenderer.on("file path", function(event, data) {
@@ -42,13 +48,22 @@ ipcRenderer.on("file path", function(event, data) {
   }
 })
 
+ipcRenderer.on("folder path", function(event, data) {
+  if(data.canceled == false) {
+    //Parse to find the file path selected by the user
+    destination = data.filePaths[0];
+    //Display the file name chosen to the user
+    document.getElementById('destination').innerHTML= destination
+  }
+})
+
 /********************************************************************************************************************************
  * Converting
  */
 
 function generatePixelValues() {
   // Ensuring that an image has been selected
-  if (filePath == null) {
+  if (filePath == null || destination == null) {
     return
   }
 
@@ -95,10 +110,11 @@ function convertFile() {
   document.getElementById('base-height-text-input').disabled = true
   document.getElementById('smoothing-text-input').disabled = true
   document.getElementById('select-file-button').disabled = true
+  document.getElementById('select-destination-button').disabled = true
 
   generatePixelValues()
   
-  worker.postMessage([filePath, fileName, pixelValues, scale, height, baseHeight, smoothN])
+  worker.postMessage([filePath, fileName, pixelValues, scale, height, baseHeight, smoothN, destination])
 }
 
 /********************************************************************************************************************************
@@ -136,6 +152,7 @@ worker.onmessage = function (e) {
     document.getElementById('height-text-input').disabled = false
     document.getElementById('base-height-text-input').disabled = false
     document.getElementById('smoothing-text-input').disabled = false
+    document.getElementById('smoothing-destination-input').disabled = false
   }
 }
 
