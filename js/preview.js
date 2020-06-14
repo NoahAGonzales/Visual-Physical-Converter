@@ -96,6 +96,14 @@ function resizeCanvasToElementSize() {
 
 // Updating the preview when a value is changed and there are no errors
 function updatePreview() {
+   // Don't update preview if any fields are empty
+   if (document.getElementById('scale-text-input').value.length == 0 ||
+   document.getElementById('height-text-input').value.length == 0 || 
+   document.getElementById('base-height-text-input').value.length == 0 ||
+   document.getElementById('smoothing-text-input').value.length == 0) {
+      return
+   }
+
    //Remove mesh from scene and clean up
    if(mesh) {
       scene.remove(mesh)
@@ -110,37 +118,32 @@ function updatePreview() {
    if(pixelValues == null) {
       return
    }
-   
-   let pValues = pixelValues
 
    // Limit size of preview
    if (pixelValues.length * pixelValues[0].length > 40000) {
-      return
-   }
-   /*
-   let downsizeN = 1
-   let r = 0
-   let c = 0
-
-   // Making pValues with resizing
-   while (Math.max(pixelValues.length/downsizeN, pixelValues[0].length/downsizeN) > 100) {
-      downsizeN++
-   }
-   for (let i = 0; i < pixelValues.length; i+=(downsizeN)) {
-      r++
-   }
-   for(let j = 0; j < pixelValues.length; j+=(downsizeN)) {
-      c++
+      //return
    }
 
-   pValues = [...Array(r)].map(e => Array(c).fill(null))
-   for (let i = 0; i < r; i++) {
-      for(let j = 0; j < c; j++) {
-         pValues[i][j] = pixelValues[i][j]
+   // Setting downsized dimentions of a maximum size of 500
+   let maxLength = 250
+   let rows = pixelValues.length
+   let cols = pixelValues[0].length
+   let downsizeFactor = 1
+   if (Math.max(pixelValues.length, pixelValues[0].length) > maxLength) {
+      downsizeFactor = Math.ceil(Math.max(pixelValues.length, pixelValues[0].length) / maxLength)
+      rows = Math.round(rows / downsizeFactor)
+      cols = Math.round(cols / downsizeFactor)
+   }
+
+   // Creating array to be used in preview
+   let pValues = [...Array(rows)].map(e => Array(cols).fill(null))
+
+   // Population preview pixel values
+   for (let i = 0, r = 0; i < pixelValues.length; i += downsizeFactor, r++) {
+      for (let j = 0, c = 0; j < pixelValues[0].length; j += downsizeFactor, c++) {
+         pValues[r][c] = pixelValues[Math.round(i)][Math.round(j)]
       }
    }
-
-   */
 
    let scale = parseFloat(document.getElementById('scale-text-input').value)
    let height = (parseFloat(document.getElementById('height-text-input').value))/255

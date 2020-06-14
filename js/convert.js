@@ -63,7 +63,7 @@ ipcRenderer.on("folder path", function(event, data) {
 
 function generatePixelValues() {
   // Ensuring that an image has been selected
-  if (filePath == null || destination == null) {
+  if (filePath == null) {
     return
   }
 
