@@ -1,11 +1,13 @@
 {
   "name": "Visual-Physical-Converter",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "description": "takes a visual file and converts it to a 3d printable file",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
