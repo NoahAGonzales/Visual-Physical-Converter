@@ -237,13 +237,13 @@ button {
     height: 100%;
 }
 
-#privacy-url {
+.settings-text {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
     color: var(--white);
     text-decoration: none;
 }
 
-#privacy-url:hover {
+.settings-text {
     text-decoration: underline;
 }
