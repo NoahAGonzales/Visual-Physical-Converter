@@ -2,5 +2,6 @@ test/
 *.stl
 *.appx
 ./dist/
+dist
 node_modules
 ./node_modules
