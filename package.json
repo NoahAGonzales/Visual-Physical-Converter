@@ -22,12 +22,12 @@
   },
   "homepage": "https://github.com/NoahAGonzales/Visual-Physical-Converter",
   "devDependencies": {
-    "electron": "^7.1.2",
+    "electron": "^7.3.1",
     "electron-builder": "^21.2.0"
   },
   "dependencies": {
     "fs": "0.0.1-security",
-    "open": "^7.0.1"
+    "open": "^7.0.4"
   },
   "build": {
     "appx": {
