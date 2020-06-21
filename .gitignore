@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 test/
 *.stl
 *.appx
 ./dist/
-=======
+dist
 node_modules
->>>>>>> c4000689d46ab4eef54ee21c1bac3dca5b767416
+./node_modules
