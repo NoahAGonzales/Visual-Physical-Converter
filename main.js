@@ -16,7 +16,7 @@ function createWindow () {
       nodeIntegrationWorker: true,
       nodeIntegrationInWorker: true,
     },
-    icon: path.join(__dirname, './icons/vpc-icon - 64x64.png')
+    icon: path.join(__dirname, './build/icon.ico')
   })  
 
   // and load the index.html of the app.
