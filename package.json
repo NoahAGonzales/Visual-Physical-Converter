@@ -1,6 +1,6 @@
 {
   "name": "Visual-Physical-Converter",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "takes a visual file and converts it to a 3d printable file",
   "main": "main.js",
   "scripts": {
