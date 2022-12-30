@@ -4,7 +4,8 @@
   "description": "takes a visual file and converts it to a 3d printable file",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "set APP_DEV=true && electron .",
+    "start-prod": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
@@ -26,8 +27,10 @@
     "electron-builder": "^21.2.0"
   },
   "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
     "fs": "0.0.1-security",
-    "open": "^7.0.4"
+    "open": "^7.0.4",
+    "opentype.js": "^1.3.4"
   },
   "build": {
     "appx": {

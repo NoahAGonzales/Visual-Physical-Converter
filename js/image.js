@@ -1,46 +1,38 @@
 const { ipcRenderer } = require("electron")
 
-/********************************************************************************************************************************
-  Initialization
-*/
-document.getElementById("invert-radio-input-black").checked = true
-
-/********************************************************************************************************************************
-  Workers
-*/
+// Define workers
 process.dlopen = () => {
 	throw new Error('Load native module is not safe')
 }
 let worker = new Worker('../workers/converter.js')
 
-/********************************************************************************************************************************
- * Selecting the file
- */
+// Initialization
+document.getElementById("invert-radio-input-black").checked = true
+let imageFilePath = null
+let imageFileName = null
+let imageDestination = null
 
-let filePath = null
-let fileName = null
-let destination = null
 
-function selectFile() {
+function selectImageFile() {
    // Send a message to the main process to open the dialog window for selecting a file
-   ipcRenderer.send('selectFile', {})
+   ipcRenderer.send('selectImageFile', {})
 }
 
-function selectDestination() {
+function selectImageDestination() {
   // Send a message to the main process to open the dialog window for seleting a folder for destination
-  ipcRenderer.send('selectDestination', {})
+  ipcRenderer.send('selectImageDestination', {})
 }
 
-ipcRenderer.on("file path", function(event, data) {
+ipcRenderer.on("image file path", function(event, data) {
   if(data.canceled == false) {
     //Parse to find the file path selected by the user
-    filePath = data.filePaths[0];
+    imageFilePath = data.filePaths[0];
     // Split to the find the name of the file selected
-    fileName = filePath.split('\\')[filePath.split('\\').length-1]
+    imageFileName = imageFilePath.split('\\')[imageFilePath.split('\\').length-1]
     //Display the file name chosen to the user
-    document.getElementById('filename').innerHTML=fileName
+    document.getElementById('image-file-name').innerHTML=imageFileName
     // Setting the image for analysis
-    document.getElementById('img-for-analysis').src = filePath
+    document.getElementById('img-for-analysis').src = imageFilePath
     //Resetting the progress bar
     updateProgressBar(0)
     // Updating the preview
@@ -48,22 +40,21 @@ ipcRenderer.on("file path", function(event, data) {
   }
 })
 
-ipcRenderer.on("folder path", function(event, data) {
+ipcRenderer.on("image folder path", function(event, data) {
   if(data.canceled == false) {
     //Parse to find the file path selected by the user
-    destination = data.filePaths[0];
+    imageDestination = data.filePaths[0];
     //Display the file name chosen to the user
-    document.getElementById('destination').innerHTML= destination
+    document.getElementById('image-destination').innerHTML= imageDestination
   }
 })
 
-/********************************************************************************************************************************
- * Converting
- */
+// ********************************************************************************************************************************
+// Converting
 
 function generatePixelValues() {
   // Ensuring that an image has been selected
-  if (filePath == null) {
+  if (imageFilePath == null) {
     return
   }
 
@@ -96,11 +87,11 @@ function convertFile() {
   let smoothN = parseFloat(document.getElementById('smoothing-text-input').value)
 
   //Ensuring that there are no errors
-  if(document.getElementById('scale-error').innerHTML.length != 0 
-    || document.getElementById('scale-error').innerHTML.length != 0 
-    || document.getElementById('scale-error').innerHTML.length != 0 
-    || document.getElementById('scale-error').innerHTML.length != 0
-    || filePath == null) {
+  if(document.getElementById('scale-error').innerHTML.length != 0 ||
+    document.getElementById('scale-error').innerHTML.length != 0 ||
+    document.getElementById('scale-error').innerHTML.length != 0 ||
+    document.getElementById('scale-error').innerHTML.length != 0 ||
+    imageFilePath == null) {
     return
   }
 	
@@ -114,12 +105,12 @@ function convertFile() {
 
   generatePixelValues()
   
-  worker.postMessage([filePath, fileName, pixelValues, scale, height, baseHeight, smoothN, destination])
+  worker.postMessage([imageFilePath, imageFileName, pixelValues, scale, height, baseHeight, smoothN, imageDestination])
 }
 
-/********************************************************************************************************************************
- * Progress bar
- */
+// ********************************************************************************************************************************
+// Progress bar
+
 const progressBar = document.getElementById('progress-bar')
 
 /**
@@ -156,9 +147,9 @@ worker.onmessage = function (e) {
   }
 }
 
-/*
-  Tabs
-*/
+// ********************************************************************************************************************************
+// Tabs
+
 function openTab(evt, name) {
   let i, tabContent, tabLinks
 

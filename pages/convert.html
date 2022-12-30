@@ -8,59 +8,82 @@
       <div class="row">
          <div class="column" id="left-bar">
             <div id="tabs">
-               <button class="tab-link active" onclick="openTab(event, 'options')">
-                  <p>Convert</p>
-               </button>
-               <button class="tab-link" onclick="openTab(event, 'settings')">
-                  <p>Settings</p>
-               </button>
+              <button class="tab-link active" onclick="openTab(event, 'options')">
+                <p>Image</p>
+              </button>
+              <button class="tab-link" onclick="openTab(event, 'font')">
+                <p>Font</p>
+              </button>
+              <button class="tab-link" onclick="openTab(event, 'settings')">
+                <p>Settings</p>
+              </button>
             </div>
             <div class="tab-content" id="options">
-               <button class="option-button" id="select-file-button" onclick="selectFile()" tabindex="0">Select File</button>
+               <button class="option-button" id="select-file-button" onclick="selectImageFile()" tabindex="0">Select Image File</button>
+               <p id="image-file-name" class="selection-text">You have not selected a file yet!</p>
 
-               <p id="filename">You have not selected a file yet!</p>
-
-               <button class="option-button" id="select-destination-button" onclick="selectDestination()" tabindex="0">Select Destination</button>
-
-               <p id="destination">You have not selected a destination yet!</p>
+               <button class="option-button" id="select-destination-button" onclick="selectImageDestination()" tabindex="1">Select Destination</button>
+               <p id="image-destination" class="selection-text">You have not selected a destination yet!</p>
 
                <div class="option">
                   <label for="scale-text-input" class="input-label">Scale</label>
-                  <input id="scale-text-input" class="input-text-box" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
+                  <input id="scale-text-input" class="input-text-box" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="2">
                   <p class="error" id="scale-error"></p>
                </div>
                
                <div class="option">
                   <label for="height-text-input" class="input-label">Height</label> 
-                  <input id ="height-text-input" class="input-text-box" type="text" name="height-text-input" value="5" onkeypress="return filterHeightInput(event)" tabindex="2">
+                  <input id ="height-text-input" class="input-text-box" type="text" name="height-text-input" value="5" onkeypress="return filterHeightInput(event)" tabindex="3">
                   <p class="error" id="height-error"></p>
                </div>
 
                <div class="option">
                   <label for="base-height-text-input" class="input-label">Base Height</label> 
-                  <input id="base-height-text-input" class="input-text-box" type="text" name="base-height-text-input" value="1" onkeypress="return filterBaseHeightInput(event)" tabindex="3"> 
+                  <input id="base-height-text-input" class="input-text-box" type="text" name="base-height-text-input" value="1" onkeypress="return filterBaseHeightInput(event)" tabindex="4"> 
                   <p class="error" id="base-height-error"></p>
                </div>
 
                <div class="option">
                   <label for="smoothing-text-input" class="input-label">Smoothing</label> 
-                  <input id="smoothing-text-input" class="input-text-box"type="text" name="smoothing-text-input" value="1" onkeypress="return filterSmoothingInput(event)" tabindex="4">
+                  <input id="smoothing-text-input" class="input-text-box"type="text" name="smoothing-text-input" value="1" onkeypress="return filterSmoothingInput(event)" tabindex="5">
                   <p class="error" id="smoothing-error"></p>
                </div>
 
                <div class="option">
                   <label for="invert-radio-input" class="input-label">Base Determination</label>
                   <div class="row">
-                     <input id="invert-radio-input-black" type="radio" name="invert-radio-input" value="black" tabindex="5">
+                     <input id="invert-radio-input-black" type="radio" name="invert-radio-input" value="black" tabindex="6">
                      <span class="base-text-option">Black Base</span>
                   </div>
                   <div class="row">
-                     <input id="invert-radio-input-white" type="radio" name="invert-radio-input" value="white" tabindex="6">
+                     <input id="invert-radio-input-white" type="radio" name="invert-radio-input" value="white" tabindex="7">
                      <span class="base-text-option">White Base</span>
                   </div>
                </div>
 
                <button class="option-button" id="convert-button" onclick="convertFile(); updatePreview()" tabindex="7">Convert</button>
+            </div>
+            <div class="tab-content" id="font">
+              <button class="option-button" id="select-font-button" onclick="selectFontFile()" tabindex="0">Select Font File</button>
+              <p id="font-file-name" class="selection-text">You have not selected a file yet!</p>
+
+
+              <button class="option-button" id="select-destination-button" onclick="selectFontDestination()" tabindex="1">Select Destination</button>
+              <p id="font-destination" class="selection-text">You have not selected a destination yet!</p>
+
+
+              <div class="option">
+                <label for="scale-text-input" class="input-label">Font Size</label>
+                <input id="scale-text-input" class="input-text-box" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
+                <p class="error" id="scale-error"></p>
+              </div>
+
+              <div class="option">
+                <label for="scale-text-input" class="input-label">Thickness</label>
+                <input id="scale-text-input" class="input-text-box" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
+                <p class="error" id="scale-error"></p>
+              </div>
+
             </div>
             <div class="tab-content" id="settings">
                <a class="settings-text" href="https://app.termly.io/document/privacy-policy/f1c44589-9492-42dd-967c-4db260e7dc5e" target="_blank">Privacy policy</a>
@@ -78,7 +101,8 @@
       <!-- Scripts -->
       <script type="text/javascript" src="../workers/converter.js"></script>
       <script type="text/javascript" src="../js/inputFilters.js"></script>
-      <script type="text/javascript" src="../js/convert.js"></script>
+      <script type="text/javascript" src="../js/image.js"></script>
+      <script type="text/javascript" src="../js/font.js"></script>
 
       <!-- Scripts for graphics -->
       <script src="../js/preview.js"></script>

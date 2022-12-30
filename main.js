@@ -2,6 +2,11 @@ const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const path = require('path')
 const open  = require('open')
 
+var isDev = process.env.APP_DEV ? (process.env.APP_DEV.trim() == 'true') : false;
+if (isDev) {
+    require('electron-reload')(__dirname);
+}
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -23,7 +28,8 @@ function createWindow () {
   win.loadFile('index.html')
 
   // Open the DevTools.
-  // win.webContents.openDevTools()
+  // TODO: Remove this before building
+  win.webContents.openDevTools()
 
   win.webContents.on('new-window', function(event, url){
     event.preventDefault();
@@ -78,35 +84,64 @@ app.on('activate', () => {
   }
 })
 
-/*
-  Selecting file
-*/
 
-let selectFile = async(event) => {
+// Image file
+
+let selectImageFile = async(event) => {
   //Opening the dialog window for selecting a file - with the filters of an image
   let filePath = await dialog.showOpenDialog({ properties: ['openFile'], filters: [
     {name: 'Images', extensions: ['jpg', 'png', 'jpeg', 'gif']}
   ]})
 
   // Sending the file path picked back to the render process
-  event.sender.send("file path", filePath)
+  event.sender.send("image file path", filePath)
 }
 
-ipcMain.on('selectFile', function(event, data) {
-  selectFile(event)
+ipcMain.on('selectImageFile', function(event, data) {
+  selectImageFile(event)
 })
 
-let selectDestination = async(event) => {
+let selectImageDestination = async(event) => {
   //Opening the dialog window for selecting a folder - with the filters of an image
   let folderPath = await dialog.showOpenDialog({ properties: ['openDirectory']})
 
   // Sending the file path picked back to the render process
-  event.sender.send("folder path", folderPath)
+  event.sender.send("image folder path", folderPath)
 }
 
-ipcMain.on('selectDestination', function(event, data) {
-  selectDestination(event)
+ipcMain.on('selectImageDestination', function(event, data) {
+  selectImageDestination(event)
 })
+
+// Font file
+
+let selectFontFile = async(event) => {
+  //Opening the dialog window for selecting a file - with the filters of an image
+  let filePath = await dialog.showOpenDialog({ properties: ['openFile'], filters: [
+    {name: 'Fonts', extensions: ['ttf']}
+  ]})
+
+  // Sending the file path picked back to the render process
+  event.sender.send("font file path", filePath)
+}
+
+ipcMain.on('selectFontFile', function(event, data) {
+  selectFontFile(event)
+})
+
+let selectFontDestination = async(event) => {
+  //Opening the dialog window for selecting a folder - with the filters of an image
+  let folderPath = await dialog.showOpenDialog({ properties: ['openDirectory']})
+
+  // Sending the file path picked back to the render process
+  event.sender.send("font folder path", folderPath)
+}
+
+ipcMain.on('selectFontDestination', function(event, data) {
+  selectFontDestination(event)
+})
+
+
 
 
 

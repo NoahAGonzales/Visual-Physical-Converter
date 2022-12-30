@@ -370,7 +370,7 @@ function updatePreview() {
 
    vertices = Float32Array.from(verts)
 
-   console.log(verts)
+   //console.log(verts)
 
    // Make new geometry
    geometry = new THREE.BufferGeometry();
