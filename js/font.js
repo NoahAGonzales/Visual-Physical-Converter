@@ -36,7 +36,55 @@ ipcRenderer.on("font file path", function(event, data) {
         console.log("FONT LOADED")
 
         console.log(font.glyphs)
-        console.log(font.glyphs[5].)
+
+        // a
+        console.log(font.glyphs.glyphs[68].getPath())
+
+        // For each glyph, generate an object
+
+        let commands = font.glyphs.glyphs[68].getPath().commands
+        console.log(commands)
+
+        
+        commands.forEach((command, index) => {
+          // Move to - start path
+          if (command.type == 'M') {
+
+          }
+          // Line
+          if (command.type == 'L') {
+
+          }
+          // Cubic bezier
+          if (command.type == 'C') {
+
+          }
+          // Quadratic bezier
+          if (command.type == 'Q') {
+
+          }
+          // End path
+          else if (command.type == 'Z') {
+
+          }
+        })
+
+
+        // m is move to - start path
+
+
+        // z - end path
+
+        // l - line too
+
+        // C - bezier curve to 
+        // Find points - https://stackoverflow.com/questions/5634460/quadratic-b%c3%a9zier-curve-calculate-points
+
+        // Q - quadratic bezier curve 
+        // Visualization - https://vectorjs.org/examples/svg-path-bezier-quadratic/
+        // Find points - https://stackoverflow.com/questions/5634460/quadratic-b%c3%a9zier-curve-calculate-points
+
+
 
         //Resetting the progress bar
         updateProgressBar(0)

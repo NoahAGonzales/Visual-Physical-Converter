@@ -121,21 +121,17 @@ button {
     display: none;
 }
 
-#options {
-
-}
-
 #font {
   display: none;
 }
 
-#options::-webkit-scrollbar {
+.tab-content::-webkit-scrollbar {
     width: 3%;
 }
-#options::-webkit-scrollbar-track {
+.tab-content::-webkit-scrollbar-track {
     background: var(--black);
 }
-#options::-webkit-scrollbar-thumb {
+.tab-content::-webkit-scrollbar-thumb {
     background: var(--medium-gray)
 }
 

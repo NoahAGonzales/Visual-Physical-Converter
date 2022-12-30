@@ -150,6 +150,7 @@ worker.onmessage = function (e) {
 // ********************************************************************************************************************************
 // Tabs
 
+// TODO: Move this to somewhere common between image and font
 function openTab(evt, name) {
   let i, tabContent, tabLinks
 
