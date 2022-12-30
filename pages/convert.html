@@ -73,14 +73,20 @@
 
 
               <div class="option">
-                <label for="scale-text-input" class="input-label">Font Size</label>
-                <input id="scale-text-input" class="input-text-box" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
+                <label for="font-size-text-input" class="input-label">Font Size</label>
+                <input id="font-size-text-input" class="input-text-box" type="text" name="font-size-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
                 <p class="error" id="scale-error"></p>
               </div>
 
               <div class="option">
-                <label for="scale-text-input" class="input-label">Thickness</label>
-                <input id="scale-text-input" class="input-text-box" type="text" name="scale-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
+                <label for="font-thickness-text-input" class="input-label">Thickness</label>
+                <input id="font-thickness-text-input" class="input-text-box" type="text" name="font-thickness-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
+                <p class="error" id="scale-error"></p>
+              </div>
+
+              <div class="option">
+                <label for="font-curve-def-text-input" class="input-label">Curve Definition</label>
+                <input id="font-curve-def-text-input" class="input-text-box" type="text" name="font-curve-text-input" value="100" onkeypress="return filterScaleInput(event)" tabindex="1">
                 <p class="error" id="scale-error"></p>
               </div>
 
@@ -99,7 +105,8 @@
       <script src="../js/three.min.js"></script>
       <script src="../js/OrbitControls.js"></script>
       <!-- Scripts -->
-      <script type="text/javascript" src="../workers/converter.js"></script>
+      <script type="text/javascript" src="../workers/imageWorker.js"></script>
+      <script type="text/javascript" src="../workers/fontWorker.js"></script>
       <script type="text/javascript" src="../js/inputFilters.js"></script>
       <script type="text/javascript" src="../js/image.js"></script>
       <script type="text/javascript" src="../js/font.js"></script>

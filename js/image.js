@@ -4,7 +4,7 @@ const { ipcRenderer } = require("electron")
 process.dlopen = () => {
 	throw new Error('Load native module is not safe')
 }
-let worker = new Worker('../workers/converter.js')
+let imageWorker = new Worker('../workers/imageWorker.js')
 
 // Initialization
 document.getElementById("invert-radio-input-black").checked = true
@@ -105,7 +105,7 @@ function convertFile() {
 
   generatePixelValues()
   
-  worker.postMessage([imageFilePath, imageFileName, pixelValues, scale, height, baseHeight, smoothN, imageDestination])
+  imageWorker.postMessage([imageFilePath, imageFileName, pixelValues, scale, height, baseHeight, smoothN, imageDestination])
 }
 
 // ********************************************************************************************************************************
@@ -133,7 +133,7 @@ function updateProgressBar (newWidth) {
 /**
  * Listens to the convertor worker for updates on the progress of conversion
  */
-worker.onmessage = function (e) {
+imageWorker.onmessage = function (e) {
   updateProgressBar(e.data[0])
 
   // Enable other functions

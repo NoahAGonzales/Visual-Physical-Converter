@@ -2,6 +2,12 @@
 // const { ipcRenderer } = require("electron")
 const opentype = require('opentype.js');
 
+// Define workers
+process.dlopen = () => {
+	throw new Error('Load native module is not safe')
+}
+let fontWorker = new Worker('../workers/fontWorker.js')
+
 // Initialization
 let fontFilePath = null
 let fontFileName = null
@@ -34,57 +40,53 @@ ipcRenderer.on("font file path", function(event, data) {
           alert('Font could not be loaded: ' + err);
       } else {
         console.log("FONT LOADED")
+        console.log(font)
 
-        console.log(font.glyphs)
+
+        // TODO: FINISH THIS AND MOVE IT TO THE WORKER
+        // For each glyph, generate an object
+        let glyphs = font.glyphs.glyphs
+        for (let i = 0; i < font.glyphs.length; i++) {
+          let points = []
+          let glyph = glyphs[i]
+          let contourIndex = -1
+          let commands = glyph.getPath().commands
+
+        }
 
         // a
-        console.log(font.glyphs.glyphs[68].getPath())
-
-        // For each glyph, generate an object
-
-        let commands = font.glyphs.glyphs[68].getPath().commands
-        console.log(commands)
-
+        // TODO: Remove this
+        commands = font.glyphs.glyphs[68].getPath().commands
+        points = []
+        contourIndex = 0
         
         commands.forEach((command, index) => {
-          // Move to - start path
+          // Move to - start new contour
           if (command.type == 'M') {
-
+            points.push([[command.x, command.y]])
           }
-          // Line
+          // Line To
           if (command.type == 'L') {
-
+            points[contourIndex].push([command.x, command.y])
           }
-          // Cubic bezier
+          // Cubic Bezier To
+          // Find points - https://stackoverflow.com/questions/5634460/quadratic-b%c3%a9zier-curve-calculate-points
           if (command.type == 'C') {
 
           }
-          // Quadratic bezier
+          // Quadratic Bezier To
+          //  Visualization - https://vectorjs.org/examples/svg-path-bezier-quadratic/
+          // Find points - https://stackoverflow.com/questions/5634460/quadratic-b%c3%a9zier-curve-calculate-points
           if (command.type == 'Q') {
-
+            
           }
-          // End path
+          // Close path
           else if (command.type == 'Z') {
-
+            contourIndex++
           }
         })
 
-
-        // m is move to - start path
-
-
-        // z - end path
-
-        // l - line too
-
-        // C - bezier curve to 
-        // Find points - https://stackoverflow.com/questions/5634460/quadratic-b%c3%a9zier-curve-calculate-points
-
-        // Q - quadratic bezier curve 
-        // Visualization - https://vectorjs.org/examples/svg-path-bezier-quadratic/
-        // Find points - https://stackoverflow.com/questions/5634460/quadratic-b%c3%a9zier-curve-calculate-points
-
-
+        console.log(points)
 
         //Resetting the progress bar
         updateProgressBar(0)
